@@ -1,4 +1,4 @@
-# 基于 JavaScript 的街舞信息共享平台开发文档
+# 基于 JavaScript 的街舞信息共享平台开发与 API 文档
 
 ## 1. 项目概述
 
@@ -23,9 +23,7 @@
 ## 2. 技术栈说明
 
 ### 2.1 总体技术路线
-根据 `需求.txt`，本系统采用以前端 JavaScript 技术为核心、以后端 Python 技术为支撑的开发方案，具体如下：
-
-- 前端：JavaScript、HTML5、CSS3、前端框架
+- 前端：JavaScript、HTML5、CSS3、React、Vite
 - 后端：Python、Django
 - 数据库：SQLite
 
@@ -35,9 +33,7 @@
 - 使用 `JavaScript` 实现页面交互逻辑。
 - 使用 `HTML5` 构建页面结构，实现响应式网页基础能力。
 - 使用 `CSS3` 完成页面布局、美化与适配。
-- 使用前端框架组织页面模块，提高开发效率与可维护性。
-
-说明：`需求.txt` 未强制指定具体前端框架，因此文档中保留“前端框架”这一表述，具体实现阶段可选择 Vue 或 React。
+- 使用 `React + Vite` 组织前端页面模块，提高开发效率与可维护性。
 
 #### 后端
 - 使用 `Python` 处理业务逻辑。
@@ -72,9 +68,6 @@
 ## 3. 系统功能需求
 
 ### 3.1 活动模块
-活动模块用于发布、展示和管理街舞相关活动。
-
-主要功能包括：
 - 用户发布活动信息
 - 活动类型支持比赛、商演、表演、伴舞等
 - 用户在线报名活动
@@ -83,17 +76,12 @@
 - 活动列表支持搜索与筛选
 
 ### 3.2 视频模块
-视频模块用于街舞视频作品展示与互动。
-
-主要功能包括：
 - 用户上传跳舞视频
 - 视频列表展示
 - 个人主页展示个人视频内容
 - 支持点赞、评论、收藏、关注
 
 ### 3.3 社交模块
-社交模块用于街舞相关话题交流和聊天室互动。
-
 聊天室分类包括：
 - 舞房招聘
 - 舞蹈心得交流
@@ -112,21 +100,15 @@
 - 按话题进行交流互动
 
 ### 3.4 商城模块
-商城模块用于街舞服装和周边商品展示与购买。
-
-主要功能包括：
 - 商品展示
 - 加入购物车
 - 下单购买
 - 支付功能
 - 订单管理
 
-说明：考虑到毕业设计项目实现难度，支付功能可采用模拟支付流程完成演示。
+说明：考虑到毕业设计项目实现难度，支付功能采用模拟支付流程完成演示。
 
 ### 3.5 我的模块
-我的模块用于统一展示个人信息与个人行为记录。
-
-主要功能包括：
 - 个人信息展示
 - 我发布的活动
 - 我报名的活动
@@ -141,7 +123,7 @@
 - 页面功能分类明确，降低用户学习成本。
 
 ### 4.2 响应式设计
-- 页面应兼容桌面端和移动端访问。
+- 页面兼容桌面端和移动端访问。
 - 保证主要功能在不同分辨率下均可正常使用。
 
 ### 4.3 可维护性
@@ -156,13 +138,12 @@
 
 ### 4.5 可扩展性
 - 后续可扩展推荐系统、消息通知、第三方地图服务、对象存储等能力。
-- 数据库模型设计应为后期扩展预留空间。
+- 数据库模型设计为后期扩展预留空间。
 
 ## 5. 系统架构设计
 
 ### 5.1 架构模式
 本系统采用前后端分离的 Web 架构：
-
 - 前端负责页面展示、交互逻辑和请求发送。
 - 后端负责业务逻辑处理、数据管理和接口返回。
 - 数据库负责平台结构化数据的存储与查询。
@@ -170,7 +151,6 @@
 ### 5.2 架构组成
 
 #### 表现层
-由前端页面组成，负责：
 - 用户登录注册页面
 - 活动展示与报名页面
 - 视频展示与互动页面
@@ -179,7 +159,6 @@
 - 个人中心页面
 
 #### 业务逻辑层
-由 Django 后端实现，负责：
 - 用户身份认证
 - 活动发布与报名逻辑
 - 视频信息管理
@@ -188,7 +167,6 @@
 - 收藏、关注、评论等交互逻辑
 
 #### 数据存储层
-由 SQLite 实现，负责：
 - 用户数据存储
 - 活动与报名数据存储
 - 视频与评论数据存储
@@ -201,8 +179,6 @@
 本系统数据库采用 `SQLite`。
 
 ### 6.2 核心实体
-根据系统功能，数据库主要围绕以下实体设计：
-
 - 用户
 - 活动
 - 活动报名
@@ -220,9 +196,6 @@
 ### 6.3 主要数据表设计
 
 #### 用户表
-用于存储系统用户基础信息。
-
-建议字段：
 - id
 - username
 - password
@@ -235,9 +208,6 @@
 - create_time
 
 #### 活动表
-用于存储活动信息。
-
-建议字段：
 - id
 - title
 - activity_type
@@ -254,9 +224,6 @@
 - create_time
 
 #### 活动报名表
-用于记录用户报名活动的信息。
-
-建议字段：
 - id
 - user_id
 - activity_id
@@ -264,9 +231,6 @@
 - checkin_status
 
 #### 视频表
-用于存储视频基础信息。
-
-建议字段：
 - id
 - user_id
 - title
@@ -279,9 +243,6 @@
 - create_time
 
 #### 视频评论表
-用于存储视频评论信息。
-
-建议字段：
 - id
 - video_id
 - user_id
@@ -289,9 +250,6 @@
 - create_time
 
 #### 聊天室表
-用于存储聊天室分类和房间信息。
-
-建议字段：
 - id
 - room_name
 - category
@@ -299,9 +257,6 @@
 - create_time
 
 #### 聊天消息表
-用于记录聊天室消息。
-
-建议字段：
 - id
 - room_id
 - user_id
@@ -309,9 +264,6 @@
 - send_time
 
 #### 商品表
-用于存储商城商品信息。
-
-建议字段：
 - id
 - name
 - category
@@ -322,9 +274,6 @@
 - status
 
 #### 购物车表
-用于记录用户购物车内容。
-
-建议字段：
 - id
 - user_id
 - product_id
@@ -332,9 +281,6 @@
 - create_time
 
 #### 订单表
-用于存储用户订单信息。
-
-建议字段：
 - id
 - user_id
 - total_amount
@@ -343,9 +289,6 @@
 - create_time
 
 #### 订单明细表
-用于记录订单中的商品项。
-
-建议字段：
 - id
 - order_id
 - product_id
@@ -353,9 +296,6 @@
 - unit_price
 
 #### 收藏表
-用于记录用户收藏的视频或活动。
-
-建议字段：
 - id
 - user_id
 - target_id
@@ -363,56 +303,274 @@
 - create_time
 
 #### 关注表
-用于记录用户之间的关注关系。
-
-建议字段：
 - id
 - follower_id
 - following_id
 - create_time
 
-## 7. 主要接口设计
+## 7. 接口说明
 
-### 7.1 用户接口
-- 用户注册
-- 用户登录
-- 用户退出登录
-- 获取个人信息
-- 修改个人信息
-- 获取我的关注和收藏
+### 7.1 接口通用说明
 
-### 7.2 活动接口
-- 发布活动
-- 获取活动列表
-- 按条件搜索活动
-- 查看活动详情
-- 报名活动
-- 活动签到
-- 获取我发布的活动
-- 获取我报名的活动
+基地址（开发环境）：
 
-### 7.3 视频接口
-- 上传视频
-- 获取视频列表
-- 获取视频详情
-- 点赞视频
-- 评论视频
-- 收藏视频
-- 获取我的视频
+- 后端：`http://127.0.0.1:8000`
+- 前端开发代理：`http://127.0.0.1:5173`
 
-### 7.4 社交接口
-- 获取聊天室分类
-- 进入聊天室
-- 发送聊天消息
-- 获取历史聊天记录
+说明：
+- 当前接口主要返回 `JSON`
+- 认证方式为 Django Session
+- 需要登录的接口在未登录时返回 `401`
+- 请求体默认使用 `application/json`
 
-### 7.5 商城接口
-- 获取商品列表
-- 查看商品详情
-- 加入购物车
-- 创建订单
-- 模拟支付
-- 查看订单记录
+### 7.2 用户模块 `/users`
+
+#### `POST /users/register/`
+用途：注册并自动登录
+
+请求示例：
+
+```json
+{
+  "username": "dancer01",
+  "password": "StrongPass123",
+  "confirm_password": "StrongPass123",
+  "nickname": "Bboy One"
+}
+```
+
+#### `POST /users/login/`
+用途：登录
+
+请求示例：
+
+```json
+{
+  "username": "bboy_chen",
+  "password": "Dance123456"
+}
+```
+
+#### `POST /users/logout/`
+用途：退出登录
+
+#### `GET /users/me/`
+用途：获取当前登录用户信息
+
+#### `PATCH /users/me/`
+用途：修改个人资料
+
+请求示例：
+
+```json
+{
+  "nickname": "Locker",
+  "phone": "13800138000",
+  "profile": "擅长 locking"
+}
+```
+
+#### `GET /users/dashboard/`
+用途：获取个人中心统计和最近数据
+
+返回包含：
+- `counts.published_activities`
+- `counts.registered_activities`
+- `counts.videos`
+- `counts.favorites`
+- `counts.following`
+- `counts.followers`
+- `counts.orders`
+- `latest.published_activities`
+- `latest.registered_activities`
+- `latest.videos`
+- `latest.orders`
+
+#### `GET /users/favorites/`
+用途：获取当前用户收藏列表
+
+#### `GET /users/followers/`
+用途：获取粉丝列表
+
+#### `GET /users/following/`
+用途：获取关注列表
+
+#### `POST /users/<user_id>/follow/`
+用途：关注指定用户
+
+### 7.3 活动模块 `/activities`
+
+#### `GET /activities/list/`
+用途：获取活动列表
+
+支持查询参数：
+- `keyword`
+- `activity_type`
+- `status`
+
+#### `POST /activities/list/`
+用途：发布活动
+
+请求示例：
+
+```json
+{
+  "title": "Freestyle Jam",
+  "activity_type": "competition",
+  "content": "开放报名",
+  "location": "上海市黄浦区",
+  "start_time": "2026-03-30T19:00:00+08:00",
+  "end_time": "2026-03-30T21:00:00+08:00",
+  "signup_deadline": "2026-03-28T18:00:00+08:00"
+}
+```
+
+#### `GET /activities/<activity_id>/`
+用途：获取活动详情
+
+#### `POST /activities/<activity_id>/register/`
+用途：报名活动
+
+#### `POST /activities/<activity_id>/checkin/`
+用途：活动签到
+
+#### `POST /activities/<activity_id>/favorite/`
+用途：收藏活动
+
+#### `GET /activities/my/published/`
+用途：获取我发布的活动
+
+#### `GET /activities/my/registered/`
+用途：获取我报名的活动
+
+### 7.4 视频模块 `/videos`
+
+#### `GET /videos/list/`
+用途：获取视频列表
+
+支持查询参数：
+- `keyword`
+
+#### `POST /videos/list/`
+用途：发布视频
+
+请求示例：
+
+```json
+{
+  "title": "Battle Clip",
+  "video_file": "videos/battle.mp4",
+  "description": "比赛片段"
+}
+```
+
+#### `GET /videos/<video_id>/`
+用途：获取视频详情和评论
+
+#### `POST /videos/<video_id>/like/`
+用途：点赞视频
+
+#### `POST /videos/<video_id>/favorite/`
+用途：收藏视频
+
+#### `POST /videos/<video_id>/comments/`
+用途：发表评论
+
+请求示例：
+
+```json
+{
+  "content": "这段节奏处理很稳"
+}
+```
+
+#### `GET /videos/my/`
+用途：获取我的视频
+
+### 7.5 社交模块 `/social`
+
+#### `GET /social/rooms/`
+用途：获取聊天室列表
+
+说明：首次访问时会自动初始化默认聊天室分类
+
+#### `GET /social/rooms/<room_id>/`
+用途：获取房间详情和历史消息
+
+#### `POST /social/rooms/<room_id>/messages/`
+用途：发送消息
+
+请求示例：
+
+```json
+{
+  "content": "这周末有人一起约练吗？"
+}
+```
+
+### 7.6 商城模块 `/mall`
+
+#### `GET /mall/products/`
+用途：获取商品列表
+
+支持查询参数：
+- `keyword`
+
+#### `POST /mall/products/`
+用途：创建商品
+
+请求示例：
+
+```json
+{
+  "name": "街舞卫衣",
+  "category": "服装",
+  "price": 199,
+  "stock": 20,
+  "description": "宽松版型"
+}
+```
+
+#### `GET /mall/products/<product_id>/`
+用途：获取商品详情
+
+#### `GET /mall/cart/`
+用途：获取当前用户购物车
+
+#### `POST /mall/cart/`
+用途：加入购物车
+
+请求示例：
+
+```json
+{
+  "product_id": 1,
+  "quantity": 2
+}
+```
+
+#### `POST /mall/orders/create/`
+用途：根据购物车创建订单
+
+#### `GET /mall/orders/`
+用途：获取我的订单列表
+
+#### `POST /mall/orders/<order_id>/pay/`
+用途：模拟支付订单
+
+### 7.7 基础检查接口
+
+#### `GET /`
+用途：健康检查
+
+返回示例：
+
+```json
+{
+  "status": "ok",
+  "project": "street-dance-system"
+}
+```
 
 ## 8. 关键业务流程
 
