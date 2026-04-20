@@ -78,6 +78,17 @@ npm run dev
 
 ## 快速启动脚本
 
+前后端一键启动：
+
+```powershell
+.\start_all.ps1
+```
+
+该脚本会分别打开两个 PowerShell 窗口：
+
+- 后端窗口：执行 `migrate`、`seed_demo_data`、`runserver`
+- 前端窗口：进入 `frontend` 并执行 `npm run dev`
+
 后端一键启动：
 
 ```powershell
