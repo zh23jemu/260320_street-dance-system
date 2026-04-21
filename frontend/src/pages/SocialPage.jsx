@@ -56,7 +56,7 @@ function SocialPage({ currentUser, setNotice }) {
       <section className="panel-card">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Community</p>
+            <p className="eyebrow">社交模块</p>
             <h2>分类聊天室</h2>
           </div>
           <span>{currentUser ? '可以发言' : '未登录只能查看'}</span>

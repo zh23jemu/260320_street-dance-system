@@ -98,7 +98,7 @@ function VideosPage({ currentUser, setNotice }) {
       <section className="panel-card">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Video Flow</p>
+            <p className="eyebrow">视频模块</p>
             <h2>视频作品墙</h2>
           </div>
           <span>{videos.length} 条作品</span>
@@ -153,7 +153,7 @@ function VideosPage({ currentUser, setNotice }) {
       <section className="panel-card">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Publish Clip</p>
+            <p className="eyebrow">发布作品</p>
             <h2>发布视频</h2>
           </div>
           <span>{currentUser ? '已登录' : '需要登录'}</span>

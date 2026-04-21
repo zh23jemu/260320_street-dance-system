@@ -46,10 +46,10 @@ function App() {
   return (
     <div className="app-shell">
       <aside className="sidebar">
-        <div>
-          <p className="eyebrow">Street Dance Hub</p>
+        <div className="sidebar-brand">
+          <p className="eyebrow">街舞平台</p>
           <h1>街舞信息共享平台</h1>
-          <p className="sidebar-copy">把活动、作品、交流和个人成长集中到一个入口里。</p>
+          <p className="sidebar-copy">围绕活动、作品、交流和装备交易整理一个更清晰的街舞社区入口。</p>
         </div>
 
         <nav className="nav-links">
@@ -65,6 +65,7 @@ function App() {
         <div className="sidebar-card">
           <span className="sidebar-label">当前状态</span>
           <strong>{currentUser ? `已登录：${currentUser.nickname || currentUser.username}` : '未登录'}</strong>
+          <small>{currentUser ? '可以继续浏览、发布和互动。' : '登录后可发布活动、评论视频与下单。'}</small>
           {currentUser ? <button onClick={handleLogout}>退出</button> : null}
         </div>
       </aside>

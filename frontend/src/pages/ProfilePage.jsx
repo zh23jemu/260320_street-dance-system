@@ -51,7 +51,7 @@ function ProfilePage({ currentUser, refreshUser, setNotice }) {
   if (!currentUser) {
     return (
       <section className="hero-card">
-        <p className="eyebrow">Profile Locked</p>
+        <p className="eyebrow">个人中心</p>
         <h2>登录后查看你的发布、报名、收藏和订单。</h2>
       </section>
     )

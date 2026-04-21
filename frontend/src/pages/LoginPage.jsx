@@ -43,9 +43,9 @@ function LoginPage({ refreshUser, setNotice }) {
   return (
     <div className="page-grid login-layout">
       <section className="hero-card login-copy">
-        <p className="eyebrow">Join The Circle</p>
-        <h2>先登录，再进入你的舞池。</h2>
-        <p>当前前端已直接对接 Django 会话登录。登录后可以发布活动、查看 dashboard、收藏和关注。</p>
+        <p className="eyebrow">账号入口</p>
+        <h2>登录后即可进入个人中心，并继续完成发布、报名与互动操作。</h2>
+        <p>当前页面已对接 Django 会话登录，登录后可继续使用活动报名、视频互动、社交交流和商城下单等功能。</p>
       </section>
 
       <section className="panel-card auth-card">

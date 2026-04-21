@@ -175,9 +175,9 @@ function MallPage({ currentUser, setNotice }) {
     <div className="page-grid">
       <section className="shop-hero">
         <div>
-          <p className="eyebrow">Street Shop</p>
-          <h2>先挑装备，再去舞池。</h2>
-          <p>商城页优先展示可选商品。没有后端商品时，会先展示样品区，让用户可以直接试选卫衣、训练裤、配件和护具。</p>
+          <p className="eyebrow">商城模块</p>
+          <h2>集中查看街舞相关服饰、配件与基础训练装备。</h2>
+          <p>商城页优先展示后端真实商品；当暂无真实商品数据时，会先用样品区保持页面可演示，并提供试选清单体验。</p>
         </div>
         <div className="shop-hero-actions">
           <strong>{displayProducts.length} 件可选商品</strong>
@@ -188,7 +188,7 @@ function MallPage({ currentUser, setNotice }) {
       <section className="panel-card shop-product-panel">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Pick First</p>
+            <p className="eyebrow">商品列表</p>
             <h2>舞蹈服饰与装备</h2>
           </div>
           <span>{hasRealProducts ? '购物车模式' : '样品试选模式'}</span>

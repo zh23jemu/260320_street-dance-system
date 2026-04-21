@@ -66,7 +66,7 @@ function ActivitiesPage({ currentUser, setNotice }) {
       <section className="panel-card">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Activity Flow</p>
+            <p className="eyebrow">活动模块</p>
             <h2>活动广场</h2>
           </div>
           <span>{activities.length} 场活动</span>
@@ -97,7 +97,7 @@ function ActivitiesPage({ currentUser, setNotice }) {
       <section className="panel-card">
         <div className="section-heading">
           <div>
-            <p className="eyebrow">Publish</p>
+            <p className="eyebrow">发布活动</p>
             <h2>发布活动</h2>
           </div>
           <span>{currentUser ? '已登录' : '需要登录'}</span>

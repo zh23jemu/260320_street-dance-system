@@ -25,10 +25,10 @@ function HomePage({ currentUser }) {
   return (
     <div className="page-grid">
       <section className="hero-card">
-        <p className="eyebrow">One Stop Street Dance Hub</p>
-        <h2>活动、作品、社群和装备，在同一块地板上完成连接。</h2>
+        <p className="eyebrow">首页概览</p>
+        <h2>把活动信息、作品展示、社群交流和商城功能放到一个清晰的入口里。</h2>
         <p>
-          这是一个面向街舞用户的垂直平台原型。你可以发布活动、展示视频、进入聊天室交流，也可以在个人中心回看自己的报名、收藏和订单记录。
+          这是一个面向街舞用户的课程设计原型。用户可以查看近期内容、进入不同功能模块，也可以在个人中心统一回看自己的发布、报名、收藏和订单记录。
         </p>
         <div className="hero-tags">
           <span>活动报名</span>
@@ -40,8 +40,8 @@ function HomePage({ currentUser }) {
 
       <section className="panel-row">
         <article className="panel-card accent-panel">
-          <span className="panel-title">平台节奏</span>
-          <strong>{currentUser ? '你已进入系统，可以直接发布活动或查看我的模块。' : '先登录，再开始发布作品和报名活动。'}</strong>
+          <span className="panel-title">当前入口</span>
+          <strong>{currentUser ? '你已登录，可以直接进入活动、视频、社交、商城和个人中心。' : '当前可先浏览公开内容，登录后再进行发布、评论和下单。'}</strong>
         </article>
         <article className="panel-card">
           <span className="panel-title">聊天室分类</span>
@@ -78,10 +78,10 @@ function HomePage({ currentUser }) {
         </article>
 
         <article className="panel-card spotlight-panel">
-          <span className="panel-title">开发状态</span>
-          <div className="stack-item"><strong>后端</strong><small>Django + SQLite 已打通</small></div>
-          <div className="stack-item"><strong>前端</strong><small>React + Vite 正在接入</small></div>
-          <div className="stack-item"><strong>当前重点</strong><small>登录、活动、个人中心</small></div>
+          <span className="panel-title">当前进展</span>
+          <div className="stack-item"><strong>后端接口</strong><small>活动、视频、社交、商城与用户中心已联通</small></div>
+          <div className="stack-item"><strong>前端页面</strong><small>主要页面已经接入，当前重点是继续优化界面细节</small></div>
+          <div className="stack-item"><strong>演示状态</strong><small>已具备课程设计与毕业设计展示基础</small></div>
         </article>
       </section>
     </div>

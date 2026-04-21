@@ -74,7 +74,9 @@ npm run dev
 
 前端默认地址：`http://127.0.0.1:5173`
 
-`vite.config.js` 已配置代理，开发模式下 `/users`、`/activities`、`/videos`、`/social`、`/mall` 会自动转发到 Django。
+`vite.config.js` 已配置 `/api` 代理，开发模式下前端会把 `/api/users`、`/api/activities`、`/api/videos`、`/api/social`、`/api/mall` 自动转发到 Django。
+
+这样可以避免前端页面路由（如 `/videos`、`/social`、`/mall`）与后端接口路径重名，防止浏览器刷新页面时直接看到后端返回的 JSON。
 
 ## 快速启动脚本
 
