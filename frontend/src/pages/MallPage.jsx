@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { apiFetch } from '../api'
 
@@ -58,6 +59,7 @@ function MallPage({ currentUser, setNotice }) {
   const [orders, setOrders] = useState([])
   const [sampleSelection, setSampleSelection] = useState([])
   const [form, setForm] = useState(initialProduct)
+  const navigate = useNavigate()
   const displayProducts = products.length > 0 ? products : sampleProducts
   const hasRealProducts = products.length > 0
 
@@ -99,6 +101,12 @@ function MallPage({ currentUser, setNotice }) {
 
   async function createProduct(event) {
     event.preventDefault()
+    if (!currentUser) {
+      setNotice('发布商品需要先登录')
+      navigate('/login')
+      return
+    }
+
     try {
       await apiFetch('/mall/products/', {
         method: 'POST',
@@ -117,6 +125,12 @@ function MallPage({ currentUser, setNotice }) {
   }
 
   async function addToCart(productId) {
+    if (!currentUser) {
+      setNotice('购买商品需要先登录')
+      navigate('/login')
+      return
+    }
+
     try {
       await apiFetch('/mall/cart/', {
         method: 'POST',
@@ -152,6 +166,12 @@ function MallPage({ currentUser, setNotice }) {
   }
 
   async function createOrder() {
+    if (!currentUser) {
+      setNotice('创建订单需要先登录')
+      navigate('/login')
+      return
+    }
+
     try {
       await apiFetch('/mall/orders/create/', { method: 'POST', body: JSON.stringify({}) })
       setNotice('订单已创建')
@@ -162,6 +182,12 @@ function MallPage({ currentUser, setNotice }) {
   }
 
   async function payOrder(orderId) {
+    if (!currentUser) {
+      setNotice('支付订单需要先登录')
+      navigate('/login')
+      return
+    }
+
     try {
       await apiFetch(`/mall/orders/${orderId}/pay/`, { method: 'POST', body: JSON.stringify({}) })
       setNotice('模拟支付成功')

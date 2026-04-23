@@ -1,4 +1,5 @@
 import { useEffect, useState } from 'react'
+import { useNavigate } from 'react-router-dom'
 
 import { apiFetch } from '../api'
 
@@ -15,6 +16,7 @@ const initialForm = {
 function ActivitiesPage({ currentUser, setNotice }) {
   const [activities, setActivities] = useState([])
   const [form, setForm] = useState(initialForm)
+  const navigate = useNavigate()
 
   async function loadActivities() {
     try {
@@ -31,6 +33,12 @@ function ActivitiesPage({ currentUser, setNotice }) {
 
   async function submitActivity(event) {
     event.preventDefault()
+    if (!currentUser) {
+      setNotice('发布活动需要先登录')
+      navigate('/login')
+      return
+    }
+
     try {
       await apiFetch('/activities/list/', { method: 'POST', body: JSON.stringify(form) })
       setNotice('活动发布成功')
@@ -42,6 +50,12 @@ function ActivitiesPage({ currentUser, setNotice }) {
   }
 
   async function registerActivity(activityId) {
+    if (!currentUser) {
+      setNotice('报名活动需要先登录')
+      navigate('/login')
+      return
+    }
+
     try {
       await apiFetch(`/activities/${activityId}/register/`, { method: 'POST', body: JSON.stringify({}) })
       setNotice('报名成功')

@@ -24,6 +24,14 @@ function HomePage({ currentUser }) {
 
   return (
     <div className="page-grid">
+      <section className="intro-banner">
+        <div className="intro-copy">
+          <span className="panel-title">平台提示</span>
+          <strong>欢迎来到街舞信息共享平台</strong>
+          <p>这里可以先浏览比赛活动、视频作品、社交房间和商城商品；只有报名、购买、评论这类需要个人信息的操作时，才需要登录。</p>
+        </div>
+      </section>
+
       <section className="hero-card">
         <p className="eyebrow">首页概览</p>
         <h2>把活动信息、作品展示、社群交流和商城功能放到一个清晰的入口里。</h2>
