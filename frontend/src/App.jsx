@@ -32,6 +32,21 @@ function App() {
     refreshUser()
   }, [])
 
+  useEffect(() => {
+    // 全局提示只短暂展示一会，避免成功提示一直占着页面顶部。
+    if (!notice) {
+      return undefined
+    }
+
+    const timer = window.setTimeout(() => {
+      setNotice('')
+    }, 2500)
+
+    return () => {
+      window.clearTimeout(timer)
+    }
+  }, [notice])
+
   async function handleLogout() {
     try {
       await apiFetch('/users/logout/', { method: 'POST', body: JSON.stringify({}) })

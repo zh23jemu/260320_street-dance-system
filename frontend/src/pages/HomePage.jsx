@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 
 import { apiFetch } from '../api'
 
-function HomePage({ currentUser }) {
+function HomePage() {
   const [rooms, setRooms] = useState([])
   const [videos, setVideos] = useState([])
   const [products, setProducts] = useState([])
@@ -38,11 +38,7 @@ function HomePage({ currentUser }) {
         </div>
       </section>
 
-      <section className="panel-row">
-        <article className="panel-card accent-panel">
-          <span className="panel-title">当前入口</span>
-          <strong>{currentUser ? '你已登录，可以直接进入活动、视频、社交、商城和个人中心。' : '当前可先浏览公开内容，登录后再进行发布、评论和下单。'}</strong>
-        </article>
+      <section className="triple-grid">
         <article className="panel-card">
           <span className="panel-title">聊天室分类</span>
           {rooms.map((room) => (
@@ -52,9 +48,7 @@ function HomePage({ currentUser }) {
             </div>
           ))}
         </article>
-      </section>
 
-      <section className="triple-grid">
         <article className="panel-card">
           <span className="panel-title">最新视频</span>
           {videos.map((video) => (
