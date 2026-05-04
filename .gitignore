@@ -5,3 +5,5 @@ db.sqlite3
 media/
 frontend/node_modules/
 frontend/dist/
+docx_render_check*/
+docx_render_check_montage/
