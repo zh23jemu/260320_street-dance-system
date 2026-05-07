@@ -76,7 +76,7 @@ function ActivitiesPage({ currentUser, setNotice }) {
   }
 
   return (
-    <div className="page-grid activity-layout">
+    <div className="page-grid">
       <section className="panel-card">
         <div className="section-heading">
           <div>

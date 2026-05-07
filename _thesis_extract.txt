@@ -1,0 +1,1687 @@
+[1] Normal: 南京邮电大学
+[2] Normal:  毕 业 设 计（论 文）
+[7] Normal: 日期： 2026年3月20日至   2026年6月7日
+[9] Normal: 毕业设计（论文）原创性声明
+[11] Normal: 本人郑重声明：所提交的毕业设计（论文），是在导师指导下独立进行研究工作所取得的成果。除文中已经注明引用的内容外，本毕业设计（论文）不包含任何其他个人或集体已经发表或撰写过的作品成果。对本研究做出过重要贡献的个人和集体，均已在文中以明确方式标明并表示谢意。
+[14] Normal:                                           论文作者签名：刘财
+[15] Normal:                                           日期：2026年6月7日
+[17] Normal: 摘  要
+[18] Normal: 随着街舞文化由线下社群走向大众传播，街舞赛事、商演招募、舞房交流、作品展示、周边商品交易等需求也越来越大。但是在实际使用场景中，街舞相关信息会散落在社交媒体、微信群、公众号、线下渠道等各个地方，用户要反复在不同的平台之间切换，主办方也很难对目标舞者进行有效的触达。本文设计并实现了一个基于JavaScript的街舞信息共享平台，希望通过一个统一的Web入口整合活动发布与报名、视频分享与互动、分类聊天室、街舞商城、个人中心等功能，给舞者、爱好者、活动组织者和商家提供比较完整的线上服务闭环。
+[19] Normal: 系统用的是前后端分离架构。前端使用JavaScript、HTML5、CSS3、React 19、React Router和Vite完成页面展示与交互逻辑；后端使用Python、Django 6和Django ORM实现业务接口、用户认证、数据模型和后台管理能力；数据库采用SQLite存储用户、活动、报名、视频、评论、聊天室、消息、商品、购物车、订单、收藏和关注等结构化数据。系统可以完成注册登录、个人资料修改、活动发布、报名、签到、收藏、视频发布、点赞、评论、分类聊天室发言、商品浏览、加入购物车、创建订单、模拟支付、个人中心统计等操作。
+[20] Normal: 经过功能测试和联调检验之后，系统可以实现街舞信息共享平台的主要业务流程，页面结构清楚，模块界限分明，具有较好的可维护性以及扩展性。本课题的实现说明，把React前端同Django后端结合起来，用以创建垂直文化社区平台是可行的，可以给街舞信息整合、社群互动和服务商业提供基本的支持。
+[21] Normal: 关键词：街舞信息共享平台；JavaScript；React；Django；SQLite
+[23] Heading 1: ABSTRACT
+[25] Normal: As street dance culture grows rapidly, people's demand for various events, performance invitations, recruitment, work sharing, community communication, etc., is becoming more and more intense. But the information about street dance is generally scattered in various places like social platforms, chats, public accounts and offline communities so that it is difficult to acquire and match resources efficiently. In order to solve the above problems, this thesis is designed and developed a JavaScript street dance information sharing platform. It includes all functions such as activity publishing & registration， sharing & spreading videos ， chatting in different category chat room, buying stuff at dance mall, managing personal information.
+[26] Normal: System is having its own frontend & Back-end; Front end is made up of JavaScript, HTML5, CSS3, React 19, React Router and Vite, Back end is done using python, django 6 and django ORM. I will use SQLite for the database to store all my structured data (users, activities, registration, videos, comments, chatroom, message, product, cart, order, favorite and follow). Functionality is Registration and Login, Profile Management, Activity Publishing, Registering and Checking in, Video Posting, Likes and Comments, Categorized Chat, Shopping Cart, Creating Orders, Simulated Payment, Personal Dashboard Statistics.
+[27] Normal: Function test, the main business process of the platform can be carried out normally. The It’s system the modules had quite clear cut outs to them, they where nice clean and adding something was rather straightforward We can see that React plus Django is a possible way to create the vertical culture community website.
+[28] Normal: Key words: Street Dance Information Sharing Platform; JavaScript; React; Django; SQLite
+[30] Normal: 目  录
+[32] toc 1: 第一章 绪论	- 5 -
+[33] toc 2: 1.1 研究背景	- 5 -
+[34] toc 3: 1.1.1 街舞文化数字化传播需求持续增长	- 5 -
+[35] toc 3: 1.1.2 垂直信息平台具有现实应用价值	- 5 -
+[36] toc 2: 1.2 研究意义	- 5 -
+[37] toc 2: 1.3 国内外研究现状	- 6 -
+[38] toc 2: 1.4 毕设主要工作	- 6 -
+[39] toc 1: 第二章 设计方案	- 8 -
+[40] toc 2: 2.1 网站开发技术介绍	- 8 -
+[41] toc 3: 2.1.1 JavaScript、HTML5与CSS3	- 8 -
+[42] toc 3: 2.1.2 React与Vite	- 8 -
+[43] toc 3: 2.1.3 Python与Django	- 8 -
+[44] toc 3: 2.1.4 SQLite数据库	- 8 -
+[45] toc 2: 2.2 网站开发工具介绍	- 8 -
+[46] toc 2: 2.3 用户需求调研分析	- 9 -
+[47] toc 3: 2.3.1 用户角色分析	- 9 -
+[48] toc 3: 2.3.2 功能性需求	- 9 -
+[49] toc 3: 2.3.3 非功能性需求	- 9 -
+[50] toc 2: 2.4 系统总体架构设计	- 9 -
+[51] toc 2: 2.5 系统功能模块设计	- 10 -
+[52] toc 3: 2.5.1 用户模块	- 10 -
+[53] toc 3: 2.5.2 活动模块	- 10 -
+[54] toc 3: 2.5.3 视频模块	- 10 -
+[55] toc 3: 2.5.4 社交模块	- 10 -
+[56] toc 3: 2.5.5 商城模块	- 11 -
+[57] toc 3: 2.5.6 前端页面模块	- 11 -
+[58] toc 2: 2.6 数据库表结构设计	- 11 -
+[59] toc 1: 第三章 系统分析	- 14 -
+[60] toc 2: 3.1 系统用例分析	- 14 -
+[61] toc 2: 3.2 系统业务流程分析	- 15 -
+[62] toc 1: 第四章 系统实现	- 17 -
+[63] toc 2: 4.1 系统开发环境搭建	- 17 -
+[64] toc 3: 4.2.1 用户认证与个人中心实现	- 18 -
+[65] toc 3: 4.2.2 活动模块实现	- 19 -
+[66] toc 3: 4.2.3 视频模块实现	- 20 -
+[67] toc 3: 4.2.4 社交聊天室实现	- 21 -
+[68] toc 3: 4.2.5 商城模块实现	- 22 -
+[69] toc 3: 4.2.6 首页与整体交互实现	- 23 -
+[70] toc 2: 4.3 前后端接口联调	- 23 -
+[71] toc 1: 第五章 系统测试	- 24 -
+[72] toc 1: 第六章 总结与反思	- 25 -
+[73] toc 1: 结束语	- 26 -
+[74] toc 1: 致谢	- 27 -
+[75] toc 1: 参考文献	- 28 -
+[76] toc 1: 附录	- 29 -
+[77] toc 1: 第一章 代码展示	- 30 -
+[78] toc 2: 1.1 前端主路由与页面入口代码	- 30 -
+[79] toc 2: 1.2 首页数据加载与平台介绍代码	- 32 -
+[80] toc 2: 1.3 活动模块前端页面代码	- 34 -
+[81] toc 2: 1.4 商城模块前端页面代码	- 37 -
+[82] toc 2: 1.5 前端统一请求封装代码	- 42 -
+[83] toc 2: 1.6 Django 项目总路由配置代码	- 43 -
+[84] toc 2: 1.7 用户模块核心视图代码	- 44 -
+[85] toc 2: 1.8 活动模块核心视图代码	- 48 -
+[86] toc 2: 1.9 视频模块核心视图代码	- 54 -
+[87] toc 2: 1.10 社交模块核心视图代码	- 59 -
+[88] toc 2: 1.11 商城模块核心视图代码	- 62 -
+[89] toc 2: 1.12 用户数据模型代码	- 67 -
+[90] toc 2: 1.13 活动数据模型代码	- 69 -
+[91] toc 2: 1.14 视频数据模型代码	- 71 -
+[92] toc 2: 1.15 社交数据模型代码	- 72 -
+[93] toc 2: 1.16 商城数据模型代码	- 73 -
+[94] toc 2: 1.17 演示数据初始化命令代码	- 75 -
+[95] toc 1: 第二章 运行说明与接口摘要	- 82 -
+[97] Heading 1: 第一章 绪论
+[98] Heading 2: 1.1 研究背景
+[99] Heading 3: 1.1.1 街舞文化数字化传播需求持续增长
+[100] Normal: 街舞是集竞技性、艺术性、社群性于一体的青年文化。伴随着街舞综艺节目、城市赛事、商业演出、舞房培训、高校社团的发展，街舞也由原来的相对小众的线下圈子慢慢走进了大众的视野。不同风格的舞种，如Hiphop、Jazz、Popping、Locking、Breaking等，吸引了大量学习者和爱好者参与。街舞用户在成长过程中不但要获取比赛、公开课、商演、伴舞招募等信息，还要看作品、分享训练经验、找练习伙伴、买服装、鞋帽、护具等商品。
+[101] Normal: 目前街舞领域的信息传播还是分散的。活动信息会出现在公众号、短视频平台或者微信群里，视频作品依靠通用内容平台，舞房招聘和比赛经历大多存放在即时通讯群聊里，商城服务则分散在各个电商平台。由于信息来源碎片化造成用户获取成本过高，主办方、商家也不能针对精准的人群进行信息分发。对于普通爱好者来说，错过报名时间、不知道活动地点、找不到合适的交流群等现象比较普遍；对于活动组织者来说，报名管理、签到统计以及用户沉淀缺少统一的工具。
+[102] Heading 3: 1.1.2 垂直信息平台具有现实应用价值
+[103] Normal: 通用社交平台虽然拥有较大的流量优势，但是它在垂直领域缺少结构化的管理能力。街舞信息共享平台要以街舞用户真实的行为链路为设计主线，把活动、作品、交流、消费、个人资料等整合到同一个系统里。通过统一的数据模型以及页面入口，可以减少用户查找信息的成本，也可以使活动报名、视频互动、聊天室交流、商品订单等之间产生联系，从而给之后的推荐、统计、运营打下基础。
+[104] Normal: 因此开发一个以街舞为领域为方向的垂直Web平台，可以成为毕业设计中前后端分离开发、数据库设计以及交互实现的综合实践，而且也有一定的现实意义。该平台以服务街舞用户为重心，用现代Web技术来实现信息共享、社区互动等功能，体现出软件工程技术在文化社群场景下的应用价值。
+[105] Heading 2: 1.2.1 研究意义
+[106] Normal: 当前，数字技术正深刻重构文化社群的互动与信息传播模式。对于街舞这类充满活力但信息高度分散的垂直文化领域，构建一个专属的信息共享平台，不仅是满足社群内在需求的必要举措，也是Web应用技术在垂直场景下的重要实践。该平台旨在整合赛事、招聘、社交、电商等核心服务，通过系统化设计解决信息孤岛问题，促进街舞文化的传播与产业发展。对用户的端点是平台搭建的平台，舞者以及爱好者们都在这里寻找他们的舞蹈舞，用户可以对赛事、商演、公开课、伴舞等信息进行查看、报名、收藏、签到等平台社交行为。
+[107] Heading 2: 1.2.2研究目的
+[108] Normal: 本设计的根本目的，在于通过技术手段打通信息壁垒，构建服务闭环。我们期望打造的不只是一个工具型网站，更是一个充满活力的街舞数字社区。它能够为舞者提供从获取资讯、报名参赛、展示作品、交流技艺到购置装备的全流程服务；为活动方与商家提供高效、精准的宣传与招募渠道；为所有爱好者提供一个沉浸式了解、参与并融入街舞文化的统一入口。最终，平台致力于达成“让街舞信息触手可及，让街舞连接无处不在”的愿景，成为赋能街舞文化推广与产业发展的核心数字基础设施。
+[109] Heading 2: 1.3.1 国外研究现状
+[110] Normal: 在信息共享平台领域，国外关于垂直社区、内容分享平台及电子商务系统的研究起步较早，成果较为丰富。相关研究普遍认为，垂直平台的核心价值在于围绕特定用户群体或场景，对内容、关系和服务进行结构化的整合。相比综合门户和通用社交平台，垂直平台表现出更强的针对性、闭环性和社区化特性。
+[111] Normal: 在Web前端技术领域，国外的技术演进和标准化进程一直处于引领地位。HTML5和CSS3已经成为现代网页开发的基础标准。赵怡娜的研究表明，HTML5与CSS3的普及极大地提升了网页的语义化程度和视觉表现力，使得复杂交互界面的构建更加高效。[2]在此基础上，前端框架得到了广泛应用，Facebook开源的React框架采用组件化思想，将页面拆分为可独立维护的模块，显著提高了单页应用的开发效率和代码复用性。{9]此外，Vite等新型构建工具的出现，进一步优化了开发启动和热更新的体验，更加适配中小型系统的快速迭代需求。[11]
+[112] Normal: 在后端开发方面，国外成熟的技术生态为平台建设提供了有力支撑。基于Python语言的Django框架是一种广泛应用的Web开发框架，具备路由调度、视图处理、对象关系映射、用户认证、后台管理和安全中间件等完整功能。Django Software Foundation发布的官方文档详细阐述了该框架的设计理念和使用方法，开发者能够依据文档快速搭建稳定的业务接口，并通过模型类清晰地描述数据库结构。[10]郭鹤楠的研究也印证了这一点，指出基于Django框架的开发流程规范且高效，尤其适合毕业设计类型系统的快速构建。[5]这些技术积累为各类信息共享平台的开发奠定了坚实基础。
+[113] Heading 2: 1.3.2 国内研究现状
+[114] Normal: 随着我国互联网技术的迅速发展和移动智能终端的全面普及，信息共享平台在教育、娱乐、电子商务等多个领域得到了广泛关注和应用。在虚拟社区的研究中，张炫秋指出，信息质量、互动便利性以及用户参与感是影响虚拟社区活跃度的关键因素，这为垂直社区的功能设计提供了重要的理论依据[8]。吴伟敏在其著作中系统梳理了网站设计与开发的基础知识体系，为国内Web开发人才的培养和技术实践提供了重要参考。[1]王萍利进一步研究了基于HTML5的前端框架应用，认为组件化开发模式和构建工具的结合已成为国内前端工程化实践的主流方向，能够有效降低开发复杂度、提升团队协作效率。[3]
+[115] Normal: 在后端技术应用方面，Python语言在国内开发者群体中的接受度持续上升。华厚强基于Python设计并实现了一款校园交易平台，其实践表明，采用Django等成熟框架能够在较短时间内完成从需求分析到系统上线的全过程，尤其适用于校园场景下中小规模信息系统的开发。[6]宫道则从性能优化的角度出发，探讨了HTML5和CSS3在网页视觉实现中的具体策略，为提升用户体验提供了实践指导。[4]在数据处理方面，宋永生探讨了基于Python的视频信息挖掘技术，为视频类内容的分析和推荐提供了技术路径，这对于包含视频分享功能的垂直社区具有借鉴意义。[7]
+[116] Normal: 然而，国内关于特定兴趣领域垂直社区的研究仍处于探索阶段，尤其是针对街舞等青年亚文化群体的数字化平台建设，相关研究尚不充分。现有研究成果表明，一个有效的街舞垂直平台，既需要提供活动时间、地点、报名情况等结构化数据，也需要为用户创造视频评论、聊天室消息等非结构化的交流空间。因此，本课题在功能设计上兼顾信息管理与社区互动，前端采用React组件划分方式，将首页、登录页、活动页、视频页、社交页、商城页、个人中心页等页面按功能模块分别组织，使页面逻辑更加清晰；后端则基于Django框架，按照用户、活动、视频、社交、商城五个核心模块进行划分，符合模块化开发的思想。系统旨在满足街舞爱好者“找活动、看作品、聊经验、买装备、管个人信息”的连续性需求，弥补当前国内在该垂直领域的研究不足。
+[117] Heading 2: 1.4 毕设主要工作
+[118] Normal: 本毕业设计以“基于JavaScript的街舞信息共享平台设计与实现”为研究内容，主要完成如下工作：对街舞用户、活动主办方、商家在信息共享场景下的需求进行分析，确定系统需要包含用户、活动、视频、社交、商城和个人中心等主要模块。第二，设计系统的总体架构，使用React前端、Django后端、SQLite数据库的前后端分离方式。第三，完成数据库模型的设计，创建用户、收藏、关注、活动、活动报名、视频、视频评论、聊天室、聊天消息、商品、购物车、订单和订单明细等实体。第四，完成前后端主要功能，即注册登录、活动发布报名、视频互动、聊天室发言、商品下单、模拟支付、个人中心统计等。第五，对系统进行功能测试、接口联调以保证系统的可用性，并对项目存在的不足及后续的优化方向进行总结。
+[120] Heading 1: 第二章 设计方案
+[121] Heading 2: 2.1 网站开发技术介绍
+[122] Heading 3: 2.1.1 JavaScript、HTML5与CSS3
+[123] Normal: JavaScript是本系统前端交互逻辑的主要语言，主要是用来处理用户的输入、页面的状态更新、接口的请求以及数据的渲染。HTML5用来搭建网页结构，CSS3用来达成视觉样式，响应式布局，卡片效果以及页面背景。系统界面使用侧边导航加内容卡片的形式，用CSS Grid、Flex布局以及媒体查询来适应桌面端和移动端的访问。
+[124] Heading 3: 2.1.2 React与Vite
+[125] Normal: React是一个用JavaScript编写的用于构建用户界面的库，可以将复杂的页面拆分成独立的组件。本系统前端采用React 19+React Router实现单页应用路由，把首页、活动、视频、社交、商城、登录、个人中心分别做成页面组件。Vite是前端构建工具，主要完成开发服务器、模块加载以及生产构建的工作。项目中的vite.config.js配置了代理规则，将/users、/activities、/videos、/social和/mall等路径转发到Django后端，方便开发阶段前后端联调。
+[126] Heading 3: 2.1.3 Python与Django
+[127] Normal: 后端使用Python语言以及Django框架来构建。Django提供了MTV开发模式、URL路由、视图函数、ORM模型、Session认证和Admin后台等能力。本系统在Django中创建了users、activities、videos、social和mall五个业务应用，分别处理用户关系、活动报名、视频互动、聊天室消息和商城订单。视图层只返回JSON数据，前端用fetch请求接口，根据返回的结果来更新页面的状态。
+[128] Heading 3: 2.1.4 SQLite数据库
+[129] Normal: 数据库使用SQLite。SQLite轻量、部署简单、与Django默认兼容，适合毕业设计阶段做原型开发和演示。系统把结构化数据存入db.sqlite3当中，后端依靠Django ORM来执行增删改查操作，从而防止直接拼接SQL语句，进而改善了代码的可读性以及可维护性。如果后期系统要面向真实的线上环境，可以将SQLite迁移到MySQL或者PostgreSQL，并配合缓存、对象存储、消息服务来提高性能。
+[130] Heading 2: 2.2 网站开发工具介绍
+[131] Normal: 本系统开发过程中主要使用Windows环境、PowerShell终端、Python虚拟环境、Django管理命令、Node.js、npm和浏览器调试工具。后端通过项目本地.venv虚拟环境安装Django 6.0.3和Pillow 12.1.1，使用manage.py执行迁移、检查和开发服务器启动。前端通过npm管理React、React DOM、React Router和Vite依赖，并使用npm run dev进行开发调试，使用npm run build生成前端构建产物。
+[132] Heading 2: 2.3 用户需求调研分析
+[133] Heading 3: 2.3.1 用户角色分析
+[134] Normal: 系统主要面向的用户有普通街舞爱好者、舞者用户、活动主办方、商城管理方。普通用户主要是浏览活动、看视频、进聊天室、买商品，舞者用户主要是发布作品、参加比赛或者公开课、与其它舞者交流，活动主办方主要是发布比赛、商演、表演、伴舞等各类活动并管理报名情况，商城管理方主要是维护商品信息、库存、订单状态。
+[135] Heading 3: 2.3.2 功能性需求
+[136] Normal: 根据需求文档以及项目实现，系统的功能需求有用户注册、登录、退出、个人资料的维护；活动列表展示、活动发布、活动报名、签到、收藏、我的活动；视频列表展示、视频发布、详情查看、点赞、收藏、评论、我的视频；社交聊天室分类展示、房间详情查看、消息发送；商城商品展示、商品创建、加入购物车、创建订单、模拟支付、订单记录；个人中心统计用户发布、报名、视频、收藏、关注、订单等信息。
+[137] Heading 3: 2.3.3 非功能性需求
+[138] Normal: 系统应该具有易用性、可靠、安全、可维护和可扩展的要求。易用性表现为导航清楚、页面分类分明、操作有反馈；可靠表现为接口对于空值、非法时间、重复报名、重复收藏、库存不足等异常情况做校验；安全表现为未登录用户不能完成发布、报名、评论、购物、个人资料查看等操作；可维护性表现为前端页面组件化、后端应用模块化；可扩展性表现为数据库实体关系清晰，后续可以添加地图定位、WebSocket实时聊天、真实文件上传、推荐算法。
+[139] Heading 2: 2.4 系统总体架构设计
+[140] Normal: 表2.1 系统总体架构设计表
+[142] Normal: 本系统使用B/S架构和前后端分离的方式。用户在浏览器中访问react前端页面的时候，前端根据用户的操作向Django后端发起HTTP请求。Django后端收到请求之后，就会对请求进行身份认证、业务校验、数据库读写以及JSON响应。SQLite数据库用来持久化保存系统数据。该架构把页面表现层和业务逻辑层分开，减小了模块之间的耦合程度，利于之后对前端交互和后端接口进行独立的优化。
+[143] Heading 2: 2.5 系统功能模块设计
+[144] Heading 3: 2.5.1 用户模块
+[145] Normal: 用户模块有账号注册、登录、退出、个人资料修改、关注者、收藏、个人中心统计。系统用Django自定义的User模型加上昵称、头像、性别、手机号、个人简介字段来扩展用户信息。注册时后端校验用户名、密码、确认密码；登录时使用Django authenticate完成账号密码验证；登录成功后使用Session保持用户状态。个人中心用dashboard接口统计用户发布的活动、报名的活动、视频、收藏、关注、粉丝、订单数量，返回最近的数据供页面使用。
+[146] Heading 3: 2.5.2 活动模块
+[147] Normal: 活动模块为赛事、商演、表演、伴舞、其他街舞活动等。活动实体包括标题、类型、封面、内容、组织者、地点、经纬度、开始时间、结束时间、报名截止时间、状态等。用户登录之后可以发布活动，后端会对必填项、时间格式、结束时间晚于开始时间、报名截止时间早于活动开始时间进行校验。用户可以报名活动，系统用activity和user的唯一约束来防止重复报名；也可以对已经报名的活动进行签到，并把签到状态和签到时间记录到数据库中。
+[148] Heading 3: 2.5.3 视频模块
+[149] Normal: 视频模块用以展示街舞作品。用户可以发布作品标题、视频地址或者文件路径，其它用户可以看到该作品的详情、点赞、收藏、发表评论。视频表存赞数、收藏数、评论数，评论表存评论用户、评论内容、创建时间。收藏视频的时候系统把目标类型设置成video Favorite 表里的数据更新为收藏数量。该模块给舞者展示作品、形成互动反馈打下了基础。
+[150] Heading 3: 2.5.4 社交模块
+[151] Normal: 社交模块有分类聊天室。系统默认创建舞房招聘、舞蹈心得交流、比赛经验、Hiphop、Swag、Jazz、Popping、Locking、Breaking和其他舞蹈分类等房间。用户可以看到房间列表、房间消息，登录之后可以发消息。目前实现使用普通的HTTP接口保存、读取消息记录，适合毕业设计原型演示，后期可以升级为WebSocket实时通信。
+[152] Heading 3: 2.5.5 商城模块
+[153] Normal: 商城模块主要对街舞服饰、装备进行展示。商品表中包含商品名、分类号、封面照片、价格、库存数量、商品描述和商品状态这六个信息。用户可以浏览商品，登录之后再加到购物车中。创建订单的时候，系统会读取当前用户的购物车项目，在数据库事务里检查库存、扣减库存、创建订单和订单明细，清空购物车。支付功能用模拟支付流程的方式实现，将订单状态改为已支付，满足毕业设计演示中对于购买流程闭环的要求。
+[154] Heading 3: 2.5.6 前端页面模块
+[155] Normal: 前端页面有首页、登录页、活动页、视频页、社交页、商城页和个人中心页。首页主要展示平台简介、聊天室分类、最新视频、商城商品、开发状态；登录页有登录表单和注册表单；活动页显示活动列表及发布、报名、收藏操作；视频页用列表加详情的形式，支持点赞、收藏、评论；社交页显示聊天室列表以及消息流；商城页显示商品、购物车、订单；个人中心页显示资料编辑、统计指标、收藏、关注、最近动态。
+[156] Heading 2: 2.6 数据库表结构设计
+[157] Normal: 表2.2 数据库核心表结构设计表
+[159] Normal: 系统数据库以用户、内容、互动、交易这四个部分的数据为中心。用户类数据有用户、关注、收藏，内容类数据有活动、活动报名、视频、视频评论，互动类数据有聊天室、聊天消息，交易类数据有商品、购物车、订单、订单明细。以下为核心的数据表说明。
+[160] Normal: 数据库设计时，对一些业务关系采取唯一约束。以活动报名表为例，在activity和user这两个表上都设定了联合唯一索引来防止同一个用户对同一个活动进行重复报名，对收藏表也设置了用户、目标类型、目标ID的联合唯一约束来防止多次收藏同样的目标，对关注表中关注者和被关注者的联合唯一索引来避免多次关注同样的人。约束可以保证数据库的完整性，即一致性。
+[162] Heading 1: 第三章 系统分析
+[163] Heading 2: 3.1 系统用例分析
+[164] Normal: 为使论文第三章更符合系统分析章节的写作逻辑，本文在页面截图之外补充了角色用例图，并结合平台主要业务流程对用户操作路径进行归纳说明。通过这些图示，可以更直观地展示街舞信息共享平台在不同角色视角下的核心功能边界。
+[165] Normal: 从平台角色划分来看，爱好者更关注内容浏览、赛事了解和社区交流；普通注册用户在此基础上还会执行登录、收藏、评论、报名和下单等操作；活动主办方则更重视活动发布、报名管理和签到统计。因此，先给出三类角色的用例图，以说明系统功能与用户角色之间的对应关系。
+[167] Normal: 图3.1 爱好者用例图
+[168] Normal: 爱好者角色不一定需要立即注册登录，但可以先通过首页、活动、视频、社交和商城等公开入口了解平台内容。该角色更多承担信息浏览和内容感知的作用，其行为路径体现了本系统“先浏览、后登录、再执行敏感操作”的整体设计原则。
+[170] Normal: 图3.2 普通用户用例图
+[171] Normal: 普通用户是平台中的核心交互角色。其典型行为包括账户登录、活动报名、视频互动、聊天室发言、商品下单以及个人中心资料维护等。这些操作贯穿了平台的主要业务闭环，也是后续系统实现与接口联调的重点内容。
+[173] Normal: 图3.3 活动主办方用例图
+[174] Normal: 活动主办方除了具备普通用户的基本访问能力之外，还承担活动创建、活动信息维护、报名数据查看与签到管理等职责。通过该用例图可以看出，活动模块并不是单一的信息展示模块，而是同时面向活动组织和参与两类业务场景。
+[175] Heading 2: 3.2 系统业务流程分析
+[176] Normal: 在明确角色边界之后，还需要进一步分析系统中的关键业务流程。相比页面截图，流程图更适合表达“先做什么、后做什么、系统如何响应”的顺序关系，因此本节围绕活动报名、商品下单支付和视频互动三个典型场景展开说明。
+[178] Normal: 图3.4 用户报名活动流程图
+[179] Normal: 活动报名流程体现了系统在业务操作前必须校验身份与业务状态的设计思路。用户只有在登录后，才能继续执行报名操作；而后端还需要进一步检查活动是否可报名、该用户是否已经报过名，从而确保报名数据的正确性与唯一性。
+[181] Normal: 图3.5 用户下单支付流程图
+[182] Normal: 商城模块的关键流程集中体现在购物车、创建订单和模拟支付三个阶段。系统在创建订单时使用事务处理库存扣减与订单生成，可以避免演示过程中出现数据不一致的问题；而支付部分则通过更新订单状态来完成毕业设计场景下的业务闭环。
+[184] Normal: 图3.6 用户视频互动流程图
+[185] Normal: 视频互动流程图说明了作品展示与互动反馈之间的循环关系。用户在前端进行点赞、收藏或评论后，后端会更新相应业务数据，再由前端重新请求详情接口完成页面刷新，从而形成较完整的互动反馈过程。
+[186] Normal: 通过以上用例图与业务流程图，可以较清晰地看出本系统既满足街舞用户的信息浏览需求，也支持活动参与、视频互动、社交交流与商城交易等核心业务，为后续系统实现与测试章节提供了明确的分析基础。
+[187] Heading 1: 第四章 系统实现
+[188] Heading 2: 4.1 系统开发环境搭建
+[189] Normal: 后端开发首先创建项目本地Python虚拟环境.venv，并在虚拟环境中安装Django和Pillow依赖。项目根目录包含manage.py和config配置目录，config/settings.py中配置INSTALLED_APPS、MIDDLEWARE、DATABASES、AUTH_USER_MODEL、STATIC_URL、MEDIA_URL和时区等内容。数据库使用SQLite，执行迁移后生成db.sqlite3文件。后端可通过manage.py runserver启动，默认运行在http://127.0.0.1:8000。
+[190] Normal: 前端位于frontend目录，使用Vite创建React项目。package.json中定义dev和build脚本，依赖包括react、react-dom、react-router-dom、vite和@vitejs/plugin-react。开发阶段通过npm run dev启动前端服务，默认访问地址为http://127.0.0.1:5173。Vite代理将业务接口路径转发到后端，减少前端开发时的跨域配置成本。
+[191] Heading 2: 4.2 系统总体结构与功能模块实现
+[192] Normal: 在完成系统分析之后，需要进一步说明平台的实现环境、总体结构以及各功能模块的页面实现情况。系统总体结构图用于展示平台从前端页面到后端业务应用、再到数据库存储之间的层次关系，而后续页面截图则用于说明主要功能模块的实现结果。
+[194] Normal: 图4.1 系统总体结构图
+[195] Normal: 系统总体结构图从角色层、前端层、接口层、业务层和数据层五个维度展示了平台组成。用户首先通过前端页面访问系统，再由统一请求封装进入后端业务应用，最后通过ORM与数据库进行数据交互。这种结构既保证了模块划分清晰，也便于后续分别扩展页面交互和后台服务。
+[196] Heading 3: 4.2.1 用户认证与个人中心实现
+[198] Normal: 图4.2 用户登录与个人中心页面截图
+[199] Normal: 用户认证由users应用来完成。register接口接受用户名、密码、确认密码、昵称、邮箱、手机号等信息，对非空校验、密码一致性校验、用户名唯一性校验通过之后创建用户并自动登录。login接口通过Django authenticate校验账号密码，成功后写入Session。logout接口用来清除当前的会话。me接口支持GET获取当前用户的个人信息，支持PATCH修改昵称、邮箱、手机号、性别和个人简介。
+[200] Normal: 个人中心用dashboard接口聚合数据。后端分别统计出当前用户发布过的活动、报名过的活动、发布的视频、收藏数、关注数、粉丝数以及订单数，然后返回最近发布活动、最近报名活动、最近视频和最近订单。前端ProfilePage在用户登录之后同时请求dashboard、favorites、following三个接口，将个人概况、统计卡片、资料编辑表单、收藏列表、关注列表、最近动态等信息展示在页面上。
+[201] Heading 3: 4.2.2 活动模块实现
+[203] Normal: 图4.3 活动模块页面截图
+[204] Normal: 活动后端用activities应用来实现。activity_list接口可以使用GET或者POST。GET请求用keyword、activity_type、status三个参数可以筛选出活动列表、组织者信息、报名人数、当前用户是否报名、是否收藏等数据。只有用户登陆之后才可发起POST请求提交标题、类型、内容、地点、时间等信息。活动详情接口、我的发布接口、我的报名接口、报名活动接口、签到活动接口、收藏活动接口分别使用不同的接口进行处理。
+[205] Normal: 活动前端页面ActivitiesPage在加载的时候请求活动列表，把活动类型、状态、标题、内容、地点和开始时间用卡片的形式展示出来。用户可以点击报名或者收藏按钮来触发相应的接口，也可以在右侧表单中输入活动标题、活动类型、活动地点、活动描述、活动开始时间、活动结束时间以及报名截止时间来发布新的活动。操作成功或者失败都会在页面顶部的notice区域给出提示。
+[206] Heading 3: 4.2.3 视频模块实现
+[208] Normal: 图4.4 视频模块页面截图
+[209] Normal: 视频后端用videos应用来实现。video_list接口可以获取视频列表以及发布视频，video_detail接口返回视频详情及评论列表，my_videos接口返回当前用户发布的视频，like_video接口增加点赞数，favorite_video接口写入收藏记录并增加收藏数，comment_video接口创建评论并更新评论数量。所有的发布、点赞、收藏、评论等操作都需要用户登录才能进行，没有登录的话会返回401状态。
+[210] Normal: 视频前端页面VideosPage用左右结构。左侧为作品列表，右侧为选中作品的详情页、视频文件路径、点赞数、收藏数、评论列表以及评论表单。用户可以在此下方发布新的视频，表单包含作品标题、视频地址或者文件路径以及作品描述。本模块实现了视频内容呈现和用户交互反馈之间互相回环的效果。
+[211] Heading 3: 4.2.4 社交聊天室实现
+[213] Normal: 图4.5 社交聊天室页面截图
+[214] Normal: 社交后端用social应用实现。room_list接口在返回房间列表之前会调用默认房间初始化逻辑，保证系统中有舞房招聘、舞蹈心得交流、比赛经验、多种舞种分类等房间。room_detail接口返回房间信息以及消息记录。send_message接口要求用户登录，接收消息内容后创建ChatMessage记录。
+[215] Normal: 社交前端页面SocialPage有房间列表、当前房间消息流。用户选择房间之后，页面发起房间详情的请求并渲染历史消息，登录用户在文本框里输入消息之后发送出去。目前采用的是以HTTP轮询式的交互方式为主，虽然还没有达到实时通信的效果，但是已经可以实现分类讨论以及消息的沉淀。
+[216] Heading 3: 4.2.5 商城模块实现
+[219] Normal: 图4.6 商城模块页面截图
+[220] Normal: 商城后端由mall应用实现。product_list接口支持商品查询和商品创建，cart_items接口支持查看购物车和加入购物车。创建订单时，后端使用transaction.atomic开启数据库事务，依次检查商品库存、扣减库存、创建Order和OrderItem记录，并清空购物车。pay_order接口模拟支付，将payment_status设为True，并将order_status更新为paid。my_orders接口返回当前用户订单和订单明细。
+[221] Normal: 商城前端页面MallPage由商品列表、新增商品、购物车、订单记录四部分组成。商品卡片显示名称、分类、描述、价格、库存，用户可以将商品加入购物车。购物车区创建订单，订单区未支付订单有立即支付按钮。经过该流程之后，系统就形成了一个从商品浏览到支付状态更新的演示闭环。
+[222] Heading 3: 4.2.6 首页与整体交互实现
+[224] Normal: 图4.7 首页整体交互页面截图
+[226] Normal: App组件为全局布局、导航、登录状态保存、路由的配置者。页面左边为固定的侧边栏，右边为主内容区。初始化的时候调用users/me接口来刷新当前用户的状态，退出登录之后清除用户状态并跳转到登录页。首页HomePage使用Promise.all并行请求聊天室、视频、商品数据，展示平台简介、聊天室分类、最新视频、商城商品、开发状态，使用户可以快速了解平台的功能。
+[227] Heading 2: 4.3 前后端接口联调
+[228] Normal: 表4.1 前后端主要接口联调表
+[230] Normal: 系统接口使用JSON作为主要的数据格式，前端统一用apiFetch方法发送请求。apiFetch默认携带Content-Type: application/json和credentials: include，保证Django Session能够在前后端请求中保持登录状态。当接口响应状态不是成功状态的时候，apiFetch会读取后端的detail字段并抛出错误，前端页面捕获后显示提示信息。统一封装可以减少各个页面重复处理请求、错误的代码。
+[231] Heading 1: 第五章 系统测试
+[232] Heading 2: 5.1 功能测试
+[233] Normal: 表5.1 系统功能测试结果表
+[235] Normal: 系统测试主要使用黑盒测试法，从用户操作的角度来检验各个模块是否符合预期。测试的重点就是正常的流程是否可以完成，异常的输入有没有提示，没有登录权限的访问是否被拦截，重复的操作是否被限制，数据是否正确更新。测试环境为本地Django后端、React前端和SQLite数据库。
+[236] Normal: 从测试结果可以看出，系统主要功能可以按照设计要求正常工作。目前视频发布只填写视频地址或者文件路径，并没有实现浏览器端真实的文件大文件上传；聊天室使用普通的HTTP接口而不是WebSocket，所以实时性还有待提高；支付为模拟流程，不涉及真实的第三方支付平台。
+[237] Heading 1: 第六章 总结与反思
+[238] Heading 2: 6.1 总结
+[239] Normal: 本文就街舞领域信息分散、活动报名困难、作品互动与社群交流缺少统一入口等状况，创建起以JavaScript为依托的街舞信息共享平台。使用React+Vite作为前端框架、Django作为后端技术、SQLite数据库来存储数据的一种方式建立用户管理、活动管理、视频管理、社交互动、商城购物、个人主页等功能模块。经过系统实现之后，用户可以进行注册登录、活动发布报名、视频发布互动、聊天室交流、商城下单以及个人行为数据查看等一系列的操作。
+[240] Normal: 前端用组件化页面组织提高了代码的可维护性，后端用Django应用拆分明确了模块边界，数据库用ORM模型描述实体和关系。系统也给出了演示数据初始化命令，可以方便地用于答辩以及功能的展示。本系统达到了毕业设计原型系统预期的目标，可以较为完整的展示出街舞信息共享平台的业务流程。
+[241] Heading 2: 6.2 反思
+[242] Normal: 由于开发周期以及毕业设计规模的限制，系统还存在着一些不足。第一，视频模块目前只用视频地址或者文件路径作为输入，没有实现完整的文件上传、转码、封面截取、对象存储等能力。第二，聊天室目前使用HTTP请求来保存和读取消息，实时互动体验比WebSocket要差一些。第三，活动模块虽然留有经纬度字段，但是没有接入地图服务以及附近活动推荐。第四，商城支付流程为模拟支付，没有接入真实的支付渠道，也没有实现完整的电商流程，即退单、发货、物流等。第五，系统安全性可以得到进一步的提高，CSRF策略、上传文件校验、接口权限细分、生产环境密钥管理、日志审计等都可以起到作用。
+[243] Normal: 后续的优化可以从以下几个方面进行，即视频模块中加入真实的文件上传以及媒体存储，社交模块中使用WebSocket实现实时聊天，活动模块中加入地图定位以及距离计算，首页和视频列表中加入标签、搜索排序、个性化推荐，商城模块中完善订单生命周期，部署时将数据库升级为MySQL或者PostgreSQL，配置Nginx、HTTPS、云服务器环境。
+[245] Heading 1: 结束语
+[246] Normal: 本文依据街舞用户的实际需求，就街舞信息共享平台的使用场景、数据结构、接口设计、功能模块及测试进行系统分析。本课题的开发使我对前后端分离Web系统完整的开发过程有了更深的理解，也更熟悉了React组件化开发、Django后端接口设计、SQLite数据建模以及业务联调。尽管系统还有很多可以改进的地方，但是其主要的功能已经可以支持活动、作品、社交、商城和个人中心等主要的业务场景。未来如果继续迭代，本平台将会变成更加真实、更加高效、更加有社区活力的街舞数字服务平台。
+[248] Heading 1: 致谢
+[249] Normal: 本论文及系统开发完成之际，首先要向指导老师表示感谢，在选题、需求分析、系统设计以及论文撰写的过程中，得到老师的指导和支持。老师的建议使我对毕业设计的研究方向更加明确，也使我在开发过程中及时发现并解决出现的问题，从而对方案进行调整。另外还要对同学、朋友在系统需求讨论、功能体验、测试反馈过程中给予的帮助致以深深的谢意，使平台的功能更符合实际使用。最后对我的学习生活给予我学习关心支持的家人致以最真挚的谢意。
+[252] Heading 1: 参考文献
+[253] Normal: [1] 吴伟敏. 网站设计与开发基础研究[M]. 北京: 清华大学出版社, 2009.
+[254] Normal: [2] 赵怡娜. HTML5与CSS3在现代网页设计中的应用研究[J]. 信息与电脑, 2021.
+[255] Normal: [3] 王萍利. 基于HTML5的前端框架应用与实践[J]. 电脑知识与技术, 2021.
+[256] Normal: [4] 宫道. HTML5+CSS3网页性能优化与视觉实现研究[J]. 软件导刊, 2020.
+[257] Normal: [5] 郭鹤楠. 基于Django框架的网站开发流程研究[J]. 电脑编程技巧与维护, 2023.
+[258] Normal: [6] 华厚强. 基于Python的校园交易平台设计与实现[J]. 现代信息科技, 2022.
+[259] Normal: [7] 宋永生. 基于Python的视频信息挖掘技术研究[J]. 计算机应用研究, 2019.
+[260] Normal: [8] 张炫秋. 虚拟社区信息共享意愿影响因素研究[J]. 情报科学, 2015.
+[261] Normal: [9] Facebook Open Source. React Documentation[EB/OL]. https://react.dev/.
+[262] Normal: [10] Django Software Foundation. Django Documentation[EB/OL]. https://docs.djangoproject.com/.
+[263] Normal: [11] Vite Team. Vite Documentation [EB/OL].https://vite.dev/
+[265] Heading 1: 附录
+[266] Normal: 南京邮电大学
+[268] Normal: 软 件 说 明 书
+[271] Normal: 题目为基于JavaScript的街舞信息共享平台设计与实现
+[276] Heading 1: 第一章 代码展示
+[277] Heading 2: 1.1 前端主路由与页面入口代码
+[278] Normal: import { NavLink, Route, Routes, useNavigate } from 'react-router-dom'
+[279] Normal: import { useEffect, useState, startTransition } from ‘react’;
+[281] Normal: import { apiFetch } from './api';
+[282] Normal: import HomePage from './pages/HomePage'
+[283] Normal: import LoginPage from './pages/LoginPage'
+[284] Normal: import ActivitiesPage from './pages/ActivitiePage'
+[285] Normal: import ProfilePage from "./pages/ProfilePage"
+[286] Normal: import VideosPage from './pages/VideosPage'
+[287] Normal: import SocialPage from './pages/SocialPage'
+[288] Normal: import MallPage from './pages/MallPage'
+[290] Normal: function App() {
+[291] Normal: const [ currentuser , setcurrentuser] = useState(null)
+[292] Normal: const [notice, setNotice] = useState('');
+[293] Normal: const navigate = useNavigate;
+[295] Normal: async function refreshUser() {
+[296] Normal: try {
+[297] Normal: const data = await apiFetch("/users/me/",{method:"get"});
+[298] Normal: startTransition(() => {
+[299] Normal: setCurrentUser(data.user);
+[300] Normal: })
+[301] Normal: } catch {
+[302] Normal: startTransition(() => {
+[303] Normal: setcurrentUser(null)
+[304] Normal: })
+[305] Normal: }
+[306] Normal: }
+[308] Normal: useEffect(() => {
+[309] Normal: refreshUser()
+[310] Normal: }, [])
+[312] Normal: async function handleLogout() {
+[313] Normal: try {
+[314] Normal: await apiFetch("/users/logout/", {"method": "POST", "body": JSON.stringify({})})
+[315] Normal: setNotice('已退出登录')
+[316] Normal: setcurrentUser(null)
+[317] Normal: navigate("/login")
+[318] Normal: } catch (error) {
+[319] Normal: setNotice(error.message)
+[320] Normal: }
+[321] Normal: }
+[323] Normal: give back
+[324] Normal: <div class="app-shell">
+[325] Normal: <aside className="sidebar">
+[326] Normal: <div className="sidebar-brand">
+[327] Normal: <p className="eyebrow">街舞平台</p>
+[328] Normal: <h1>街舞信息共享平台</h1>
+[329] Normal: <p className="sidebar-copy">围绕活动、作品、交流和装备交易整理一个更清晰的街舞社区入口。</p>
+[330] Normal: </div>
+[332] Normal: <nav className='nav-links'>
+[333] Normal: <NavLink to="/">首页</NavLink>
+[334] Normal: <NavLink to="/activities">活动</NavLink>
+[335] Normal: <Navlink to="/Videos">Video</Navlink>
+[336] Normal: <NavLink to="/social">社交</NavLink>
+[337] Normal: <NavLink to="/mall">商城</NavLink>
+[338] Normal: <NavLink to="/profile">我的</NavLink>
+[339] Normal: <NavLink to="/login">Login</NavLink>
+[340] Normal: </nav>
+[342] Normal: <div class="sidebar-card">
+[343] Normal: <span className="sidebar-label">当前状态</span>
+[344] Normal: <strong>{currentUser ? `已登录：${currentUser.nickname || currentUser.username}` : '未登录'}</strong>
+[345] Normal: <small>{currentUser ? '可以继续浏览、发布和互动。' : '登录后可发布活动、评论视频与下单。'}</small>
+[346] Normal: {currentUser ? <button onClick={handleLogout}>退出</button> : null}
+[347] Normal: </div>
+[348] Normal: </aside>
+[350] Normal: <main class="content">
+[351] Normal: {notice ? <div className="notice">{notice}</div> : null}
+[352] Normal: <Routes>:
+[353] Normal: <Route path='/' element = {<HomePage currentUser={currentUser} refreshUser={refreshUser} setNotice={setNotice}/>} />
+[354] Normal: <Route path='/login' element = {<LoginPage refreshUser={refreshUser} setNotice={setNotice}/>} />
+[355] Normal: <Route path='/activities'element={<ActivitiesPage currentUser={currentUser}setNotice = {setNotice}/>} />
+[356] Normal: <Route path='/videos'element = {<VideosPage currentUser={currentUser} setNotice={setNotice}/>}/>;
+[357] Normal: <Route path="/social" element={<SocialPage currentUser={currentUser} setNotice={setNotice} />} />
+[358] Normal: <Route path='/mall' element = {<MallPage currentUser={currentUser} setNotice={setNotice}/>} />
+[359] Normal: <Route path="/profile" element={<ProfilePage currentUser={currentUser} refreshUser={refreshUser} setNotice={setNotice} />} />
+[360] Normal: </Routes>
+[361] Normal: </main>
+[362] Normal: </div>
+[363] Normal: )
+[364] Normal: }
+[366] Normal: export default App
+[367] Heading 2: 1.2 首页数据加载与平台介绍代码
+[368] Normal: import {useEffect, useState} from 'react'
+[370] Normal: import { apiFetch } from '../api';
+[372] Normal: function HomePage({ currentUser }) {
+[373] Normal: const [rooms,setRooms] = useState([]);
+[374] Normal: const [videos,setVideos]= [ , ];
+[375] Normal: const [products,setProducts] = useState([]);
+[377] Normal: useEffect(():any => {
+[378] Normal: async function loadHome() {
+[379] Normal: const [roomData, videoData, productData] = await Promise. all([
+[380] Normal: apiFetch('/social/rooms/')
+[381] Normal: apiFetch('/videos/list/'),
+[382] Normal: apiFetch('/mall/products/');
+[383] Normal: ])
+[384] Normal: setRooms(roomData.items.slice(0, 4))
+[385] Normal: setvideos(Array.from(videoData.items).slice(0, 3))
+[386] Normal: setProducts(productData.items.slice(0, 3));
+[387] Normal: }
+[389] Normal: loadHome().catch(() => {});
+[390] Normal: }, [])
+[392] Normal: give back
+[393] Normal: <page-grid className="page-grid">
+[394] Normal: <secion class=’hero-card'>
+[395] Normal: <p className="eyebrow">首页概览</p>
+[396] Normal: 把活动信息、作品展示、社群交流、商城等整合成一个入口。</h2>
+[397] Normal: <p>
+[398] Normal: 同学们可以使用街舞信息共享平台。浏览比赛活动、视频作品、社交房间、商城商品的时候不需要登录，但是报名、购买、评论等需要个人信息操作时就需要登录。登录之后还可以在个人中心统一查看自己的发布、报名、收藏、订单等记录。
+[399] Normal: </p>
+[400] Normal: <div class="hero-tags">
+[401] Normal: <span>活动报名</span>
+[402] Normal: <span>视频分享</span>
+[403] Normal: <span>聊天室</span>
+[404] Normal: <span>个人中心</span>
+[405] Normal: </div>
+[406] Normal: </section>
+[408] Normal: <section class="panel-row">
+[409] Normal: <'article class="panel-card accent-panel">
+[410] Normal: <span className="panel-title">当前入口</span>
+[411] Normal: <strong>{currentUser ? '你已登录，可以直接进入活动、视频、社交、商城和个人中心。' : '当前可先浏览公开内容，登录后再进行发布、评论和下单。'}</strong>
+[412] Normal: </article>
+[413] Normal: <'article class="panel-card">
+[414] Normal: <span className="panel-title">聊天室分类</span>
+[415] Normal: {rooms.map((room) => {
+[416] Normal: <div key={room.id} class="mini-row">
+[417] Normal: {room.room_name}
+[418] Normal: {room.category}
+[419] Normal: </div>
+[420] Normal: ))}
+[421] Normal: </article>
+[422] Normal: </section>
+[424] Normal: <aside class="triple-grid">
+[425] Normal: <'article className="panel-card">
+[426] Normal: <span className="panel-title">最新视频</span>
+[427] Normal: {video.map((video) => (
+[428] Normal: <video key={video.id} class="stack_item">
+[429] Normal: <Strong>{video.title}</Strong>
+[430] Normal: {video.user? video.user?.nickname: video.user.username}
+[431] Normal: <small>{video.description || '暂无描述'}</small>
+[432] Normal: </div>
+[433] Normal: ))}
+[434] Normal: </article>
+[436] Normal: <'article class="panel-card">
+[437] Normal: <span className="panel-title">商城商品</span>
+[438] Normal: {products.map((product) => (
+[439] Normal: <div key={product.id} class="stack-item">
+[440] Normal: <{product.name}>
+[441] Normal: <span>{product.category}</span>
+[442] Normal: <\small>¥ {product.price}</\small>
+[443] Normal: </div>
+[444] Normal: ))}
+[445] Normal: </article>
+[447] Normal: <'article class="panel-card spotlight-panel">
+[448] Heading 2: 1.3 活动模块前端页面代码
+[449] Normal: import {useEffect, useState} from 'react'
+[450] Normal: import {useNavigate} from 'react-router- dom’;
+[452] Normal: import { apiFetch } from '../api'
+[454] Normal: const initialForm = {
+[455] Normal: title: '',
+[456] Normal: activity_type: competition
+[457] Normal: content: '',
+[458] Normal: location: '',
+[459] Normal: start_time: '',
+[460] Normal: end_time: '',
+[461] Normal: signup_deadline: '',
+[462] Normal: }
+[464] Normal: function ActivitiesPage({ currentUser, setNotice }) {
+[465] Normal: const [activities, setActivities] = useState([]);
+[466] Normal: const [form,setForm] = useState(initialForm)
+[467] Normal: const navigate = useNavigate;
+[469] Normal: async function loadActivities() {
+[470] Normal: try {
+[471] Normal: const data = await apiFetch("/activities/list");
+[472] Normal: setactivities(Data.items)
+[473] Normal: } catch (error) {
+[474] Normal: setNotice(error.message)
+[475] Normal: }
+[476] Normal: }
+[478] Normal: useEffect((): void {
+[479] Normal: loadActivity():
+[480] Normal: }, [])
+[482] Normal: async function submitActivity(event) {
+[483] Normal: event.preventDefault()
+[484] Normal: if (!currentUser) {
+[485] Normal: setNotice('发布活动需要先登录')
+[486] Normal: navigate("/login")
+[487] Normal: returns
+[488] Normal: }
+[490] Normal: try {
+[491] Normal: await apiFetch("/activities/list/", {"method":"POST", “body”：JSON. stringifY(form)})
+[492] Normal: setNotice('活动发布成功')
+[493] Normal: setForm(initialForm)
+[494] Normal: loadActivities()
+[495] Normal: } catch (error) {
+[496] Normal: setNotice(error.message)
+[497] Normal: }
+[498] Normal: }
+[500] Normal: async function registerActivity(activityId) {
+[501] Normal: if (!currentUser) {
+[502] Normal: setNotice('报名活动需要先登录')
+[503] Normal: navigate("/login")
+[504] Normal: back
+[505] Normal: }
+[507] Normal: try {
+[508] Normal: await apiFetch(`/activities/${activityId}/register/`, {method: "POST", body: JSON.stringify({})})
+[509] Normal: setNotice('报名成功')
+[510] Normal: loadActivities()
+[511] Normal: } catch (error) {
+[512] Normal: setNotice(error.message)
+[513] Normal: }
+[514] Normal: }
+[516] Normal: async function favoriteActivity(activityId) {
+[517] Normal: try {
+[518] Normal: await apiFetch( `/activities/${activityId}/favorite/`, {method: 'POST',body:JSON.stringify({})} )
+[519] Normal: setNotice('活动已收藏')
+[520] Normal: loadActivitity()
+[521] Normal: } catch (error) {
+[522] Normal: setNotice(error.message)
+[523] Normal: }
+[524] Normal: }
+[526] Normal: give back
+[527] Normal: <div class="page-grid">
+[528] Normal: <section class="panel-card">
+[529] Normal: <section className="section-heading">
+[530] Normal: <div>
+[531] Normal: <p className="eyebrow">活动模块</p>
+[532] Normal: <h2>活动广场</h2>
+[533] Normal: </div>
+[534] Normal: <span>{activities.length} 场活动</span>
+[535] Normal: </div>
+[537] Normal: <div class="activity-grid">
+[538] Normal: {activities.map((activity) => {
+[539] Normal: <'article key={activity.id} class="activity-card">
+[540] Normal: < activity-meta>
+[541] Normal: <>{}<{activity_type}>
+[542] Normal: <>{activity.status}</>
+[543] Normal: </div>
+[544] Normal: <h3>{activity.title}</h3>
+[545] Normal: <p>{activity.content}</p>
+[546] Normal: <div class="stack-item compact">
+[547] Normal: <strong>{location}</strong>
+[548] Normal: <new Date(activity.start_time).toLocaleString()>=
+[549] Normal: </div>
+[550] Normal: <div class="button-row">
+[551] Normal: <button onClick={() => registerActivity(activity.id)}>报名</button>
+[552] Normal: <button className="ghost-button" onClick={() => favoriteActivity(activity.id)}>收藏</button>
+[553] Normal: </div>
+[554] Normal: </article>
+[555] Normal: ))}
+[556] Normal: </div>
+[557] Normal: </section>
+[558] Heading 2: 1.4 商城模块前端页面代码
+[559] Normal: import {useEffect, useState} from 'react'
+[560] Normal: import {useNavigate} from “react- -routgdom”;
+[562] Normal: import { apiFetch } from '../api';
+[564] Normal: const initialProduct = {
+[565] Normal: name: '',
+[566] Normal: category: '',
+[567] Normal: price: '',
+[568] Normal: stock: '',
+[569] Normal: description: '',
+[570] Normal: }
+[572] Normal: 商城页需要用户一进入页面就立即开始选择商品，因此这里设置了前端样品。
+[573] Normal: 当后端没有商品数据时，页面会显示这些样品，用户可以先将它们加入试选清单；
+[574] Normal: 如果后端已经存在真实的商品，那么就先展示真实的商品，真实的商品仍然走购物车、订单接口。
+[575] Normal: const sampleProducts = [
+[576] Normal: {
+[577] Normal: id: 'sample-hoodie',
+[578] Normal: name: '城市练舞宽松卫衣',
+[579] Normal: category: '服装',
+[580] Normal: price: '199.00'
+[581] Normal: stock: 24,
+[582] Normal: description：适合日常练舞、排练穿搭，宽松版型适合做大幅度的动作。',
+[583] Normal: sample: yes
+[584] Normal: },
+[585] Normal: {
+[586] Normal: id: 'sample-pants',
+[587] Normal: name: '地板动作训练长裤',
+[588] Normal: category: '服装',
+[589] Normal: price: '169.00'
+[590] Normal: stock: 18
+[591] Normal: description: '耐磨面料，适合Breaking、Popping等训练场景。',
+[592] Normal: sample: istru
+[593] Normal: },
+[594] Normal: {
+[595] Normal: id: 'sample-cap',
+[596] Normal: name: '演出鸭舌帽',
+[597] Normal: category: '配件',
+[598] Normal: price: '89.00'
+[599] Normal: stock: 36,
+[600] Normal: 基础百搭款可以用来参加演出，也可以用作街拍和日常训练。',
+[601] Normal: sample: yes
+[602] Normal: },
+[603] Normal: {
+[604] Normal: id: 'sample-kneepad',
+[605] Normal: name: '膝部防护护具',
+[606] Normal: category: '护具',
+[607] Normal: price: '59.00'
+[608] Normal: stock: 42,
+[609] Normal: 为地板动作训练提供基础缓冲保护，适合新手练习。',
+[610] Normal: Sample: true,
+[611] Normal: },
+[612] Normal: ]
+[614] Normal: function MallPage({ currentUser, setNotice }) {
+[615] Normal: const [products,setProducts] = useState([]);
+[616] Normal: const [cart, setCart] = useState([]);
+[617] Normal: const [orders, setOrders] = useState([]);
+[618] Normal: const[ sampleSelection ,sampleSetSelection ] = useState([])
+[619] Normal: const [form, setForm] = useState(productInitial)
+[620] Normal: const navigate = useNavegate();
+[621] Normal: const displayProducts = (products.length > 0) ? products : sampleProducts
+[622] Normal: const hasRealProducts = products. length > 0
+[624] Normal: async function loadProducts() {
+[625] Normal: try {
+[626] Normal: const data = await apiFetch("/mall/products/");
+[627] Normal: setProducts(data.products);
+[628] Normal: } catch(error) {
+[629] Normal: setNotice(error.message)
+[630] Normal: }
+[631] Normal: }
+[633] Normal: async function loadPrivateData() {
+[634] Normal: if (!currentUser) {
+[635] Normal: unsetCart()
+[636] Normal: setOrders([])
+[637] Normal: returns
+[638] Normal: }
+[640] Normal: try {
+[641] Normal: const [cartData, ordersData] = await Promise. all([
+[642] Normal: apiFetch('/mall/cart/')
+[643] Normal: apiFetch('/mall/orders/')
+[644] Normal: ])
+[645] Normal: setCart(cartData.item);
+[646] Normal: setOrders(ordersData.items)
+[647] Normal: } catch (error) {
+[648] Normal: setNotice(error.message)
+[649] Normal: }
+[650] Normal: }
+[652] Normal: effect(() => {
+[653] Normal: loadProducts()
+[654] Normal: }, [])
+[656] Normal: useEffect(() => {
+[657] Normal: loadPrivateData()
+[658] Normal: }, [currentUser])
+[660] Normal: async function createProduct(event) {
+[661] Normal: event.preventDefault()
+[662] Normal: if (!currentUser) {
+[663] Normal: setNotice('发布商品需要先登录')
+[664] Normal: navigate("/login")
+[665] Normal: back
+[666] Normal: }
+[668] Normal: try {
+[669] Normal: await apiFetch('/mall/products', {
+[670] Normal: method: 'POST',
+[671] Normal: body: JSON.stringify({
+[672] Normal: ...for:
+[673] Normal: price: Number(form.price),
+[674] Normal: stock: Number(form.stock),
+[675] Normal: }),
+[676] Normal: })
+[677] Normal: setNotice('商品创建成功')
+[678] Normal: setForm(initialProduct)
+[679] Normal: await loadproducts()
+[680] Normal: } catch (error) {
+[681] Normal: setNotice(error.message)
+[682] Normal: }
+[683] Normal: }
+[685] Normal: async function addToCart(productId) {
+[686] Normal: if (!currentUser) {
+[687] Normal: setNotice('购买商品需要先登录')
+[688] Normal: navigate("/login")
+[689] Normal: reutern:
+[690] Normal: }
+[692] Normal: try {
+[693] Normal: await apiFetch('/mall/cart', {
+[694] Normal: method: 'POST',
+[695] Normal: body: JSON.stringify({ product_id: productId, quantity: 1 }),
+[696] Normal: })
+[697] Normal: setNotice('已加入购物车')
+[698] Normal: await loadPrivateData();
+[699] Normal: } catch (error) {
+[700] Normal: setNotice(error.message)
+[701] Normal: }
+[702] Normal: }
+[704] Normal: function toggleSampleSelection(product) {
+[705] Normal: setSampleSelection((current) => {
+[706] Normal: const exists = current.some((item) => item.id === product.id);
+[707] Normal: if (true) {
+[708] Normal: setNotice('已从试选清单移除')
+[709] Normal: return current.filter((item) => item.id !== product.id)
+[710] Normal: }
+[712] Normal: setNotice('已加入试选清单')
+[713] Normal: return [...current, product]
+[714] Normal: })
+[715] Normal: }
+[717] Normal: function handleProductAction(product) {
+[718] Normal: if (product.sample) {
+[719] Heading 2: 1.5 前端统一请求封装代码
+[720] Normal: const defaultHeaders= {
+[721] Normal: 'Content-Type': 'application/json',
+[722] Normal: }
+[724] Normal: export async function apiFetch(path, options = {}) {
+[725] Normal: // 所有前端接口统一走 /api 前缀。
+[726] Normal: 这样浏览器地址栏中页面路由仍然保留了 /videos、/mall 等前端路径，
+[727] Normal: 只有真正的接口请求才会被Vite代理到Django，防止刷新页面时获取到后端JSON。
+[728] Normal: const requestPath = path.startsWith('/api/') ? path : `/api${path}`;
+[730] Normal: const response = await fetch(requestPath,{
+[731] Normal: credentials: 'include',
+[732] Normal: headers: {
+[733] Normal: ...defaultHeaders,
+[734] Normal: ...(options.headers || {}),
+[735] Normal: },
+[736] Normal: …Options，
+[737] Normal: })
+[739] Normal: const data = await response. json().catch(()=>{})
+[740] Normal: if (!response.ok) {
+[741] Normal: throw new Error(data.detail ??"Request failed" )
+[742] Normal: }
+[744] Normal: return date
+[745] Normal: }
+[746] Heading 2: 1.6 Django 项目总路由配置代码
+[747] Normal: from django. settings *
+[748] Normal: from django. conf. urls:
+[749] Normal: from django.contrib.admin import
+[750] Normal: from django.http import JsonResponse
+[751] Normal: from django.urls import include, path
+[754] Normal: def health_check(_request):
+[755] Normal: return JsonResponse({'status': 'ok', 'project': 'street-dance-syste'})
+[758] Normal: urlpatterns = [
+[759] Normal: path('','health_check',name = 'health-check')
+[760] Normal: path(‘admin’, siret),
+[761] Normal: path("users/", include(users.urls)),
+[762] Normal: path('activities/', include('activities.urls')),
+[763] Normal: videos(“/ Videos/”,include(’video'))):
+[764] Normal: path(‘social/', include(‘social.')),
+[765] Normal: path('mall/', mall.urls),
+[766] Normal: ]
+[768] Normal: if (settings.debug):
+[769] Normal: urlpatterns += static(settings.MEDIA_URL,document_root =settings.MEDIA_ROOT)
+[770] Heading 2: 1.7 用户模块核心视图代码
+[771] Normal: import json
+[773] Normal: from django.contrib.auth import logout,login, authenticate
+[774] Normal: from django.http import JsonResponse
+[775] Normal: from django.shortcuts import get_object_or_404
+[776] Normal: from django.views.decorators.csrf importcsrf_ exempt
+[777] Normal: from django.views.decorators.http import require_http_metho
+[779] Normal: from activities. models import Activity
+[780] Normal: from mall. models import Order
+[781] Normal: from videos. models import Video
+[783] Normal: from .models import Favorite, Follow, User
+[786] Normal: def _json_erro(message, status=400):
+[787] Normal: return JsonResponse({'detail': message}, status=status)
+[790] Normal: def _parse_json(request):
+[791] Normal: if not request.body:
+[792] Normal: return {}
+[794] Normal: try:
+[795] Normal: return json.loads(request.body)
+[796] Normal: except json.JSONDecodeError:
+[797] Normal: Return nothing.
+[800] Normal: def _serialize_user(user):
+[801] Normal: return {
+[802] Normal: 'id': user.id,
+[803] Normal: 'username':user. username,
+[804] Normal: 'nickname': user..nickname,
+[805] Normal: 'email': user.email,
+[806] Normal: 'phone': user.phone,
+[807] Normal: 'gender': user.gender,
+[808] Normal: 'profile':user. profile,
+[809] Normal: 'is_staff': user.is_staff,
+[810] Normal: }
+[813] Normal: def _serialize_activity(activity):
+[814] Normal: return {
+[815] Normal: 'id':activity. id,
+[816] Normal: 'title':activity. title,
+[817] Normal: 'activity_type': activity.activity_type,
+[818] Normal: 'location'：activity. Location,
+[819] Normal: 'status': activity.status,
+[820] Normal: 'start_time': str(activity.start_time),
+[821] Normal: }
+[824] Normal: def _serialize_video(video):
+[825] Normal: return {
+[826] Normal: 'id':video. id,
+[827] Normal: 'title':video. title,
+[828] Normal: 'description': video.description,
+[829] Normal: 'like_count'： video_like_count
+[830] Normal: 'favorite_count': video.favorite_count,
+[831] Normal: 'comment_count': video.comment_count,
+[832] Normal: "created\_at": str(video.created\_at),
+[833] Normal: }
+[836] Normal: def _serialize_order(order):
+[837] Normal: return {
+[838] Normal: 'id': order.id,
+[839] Normal: 'total_amount': str(order.total_amount),
+[840] Normal: order_status: order.order_status,
+[841] Normal: 'payment_status': order.payment_status,
+[842] Normal: 'created_at': order.created_at.isoformat(),
+[843] Normal: }
+[846] Normal: def _serialize_follow(relationship):
+[847] Normal: Target: Relationship. following
+[848] Normal: return {
+[849] Normal: 'id': relationship.id,
+[850] Normal: 'user': target,
+[851] Normal: 'created_at': relationship.created_at.isoformat(),
+[852] Normal: }
+[855] Normal: def _serialize_follower(relationship):
+[856] Normal: source = relationship.follower
+[857] Normal: return {
+[858] Normal: 'id': relationship.id,
+[859] Normal: "user": serialize(source),
+[860] Normal: 'created_at': str(relationship.created_at),
+[861] Normal: }
+[864] Normal: @require_http_method(["GET"])
+[865] Normal: def index(_request):
+[866] Normal: return JsonResponse({“module”: “users”, “status”:“ready” })
+[869] Normal: @csrf_exempt
+[870] Normal: @require_http_method(['POST'])
+[871] Normal: def register(request):
+[872] Normal: payload = parse_json(request)
+[873] Normal: if payload ==None:
+[874] Normal: return _json_error('请求体必须是合法 JSON。')
+[876] Normal: username=(payload.get(‘username’,' ' )or' ').strip()
+[877] Normal: password = payload.get("password") or ""
+[878] Normal: confirm_password = payload.get('confirm_password', '') or ""
+[880] Normal: if not username and not password:
+[881] Normal: return _json_error('用户名和密码不能为空。')
+[882] Normal: if password !=confirm_password:
+[883] Normal: return _json_error('两次输入的密码不一致。')
+[884] Normal: If User.objects.filter(username__exact=username):
+[885] Normal: return _json_error('用户名已存在。')
+[887] Normal: user = User.objects.create_user(user),
+[888] Normal: Username=username,
+[889] Normal: password=password,)
+[890] Normal: email=(payload.get('email') or '').strip(),
+[891] Normal: nickname=(payload.get('nickname') or '').strip(),
+[892] Normal: phone=(payload.get('phone') or '').strip(),
+[893] Normal: gender=payload.get('gender') or User.Gender.UNKNOWN,
+[894] Normal: profile=payload.get("profile") or "",profile.strip(),
+[895] Normal: )
+[896] Normal: login (requsest,user)
+[897] Normal: return JsonResponse({"detail":"sucess register.","user":_serialize_user(user)}, status=201)
+[900] Normal: @csrf_exempt
+[901] Normal: @require_http_methods(["POST"])
+[902] Normal: def login_view():
+[903] Normal: payload = parse_json(request)
+[904] Normal: if payload == None:
+[905] Normal: return _json_error('请求体必须是合法 JSON。')
+[907] Normal: username: = payload.&quot;username&quot; &quot;++
+[908] Normal: password = payload.get('password', '') or ''
+[909] Normal: user = authenticate(request,username =uname ,password = password)
+[910] Normal: if user == None:
+[911] Normal: return _json_error('用户名或密码错误。', status=401)
+[913] Normal: login: request,user
+[914] Normal: return JsonResponse({'detail': 'login success','user' :serialize_user })
+[917] Normal: @csrf_exempt
+[918] Normal: @require_http_methoDs(['POST'])
+[919] Normal: def logout_view(request):
+[920] Normal: logout(request):
+[921] Normal: return JsonResponse({'detail':'logout successfull.'})
+[924] Normal: @csrf_exempt
+[925] Normal: @require_http_methods(['GET', 'PATCH'])
+[926] Normal: def me(request):
+[927] Normal: if not request.user.is_authenticated:
+[928] Normal: return _json_error('请先登录。', status=401)
+[930] Normal: if request.method == "GET":
+[931] Heading 2: 1.8 活动模块核心视图代码
+[932] Normal: import json
+[934] Normal: import django.contrib.auth.models as auth_models:
+[935] Normal: from django.http import JsonResponse
+[936] Normal: from django.shortcuts: get_object_or_404
+[937] Normal: from django.utils import timezone
+[938] Normal: from django.utils.dateparse import parse_datetime
+[939] Normal: from django.views.decorators.csrf import csrf__exempt
+[940] Normal: from django.views.decorators.http import require_http_metho
+[942] Normal: from users. model: Favori te：
+[944] Normal: from .models import Activity, ActivityRegistration
+[946] Normal: User = get_uesr()
+[949] Normal: def _json_erroa(rnssage, sttuass=400):
+[950] Normal: return JsonResponse({'detail': message},status = status)
+[953] Normal: def _parse_json(request):
+[954] Normal: if not request.body:
+[955] Normal: return {}
+[957] Normal: try:
+[958] Normal: return json.loads(request.body)
+[959] Normal: except json.JSONDecodeError:
+[960] Normal: Return none:
+[963] Normal: def _parse_client_ datetime(value,field_name):
+[964] Normal: dt = parse_datetime(value or '')
+[965] Normal: if dt == None:
+[966] Normal: raise ValueError(f'{field_name} 格式无效，请使用 ISO 8601 时间格式。')
+[967] Normal: if timezone.is_naive(dt):
+[968] Normal: dt = timezone.make_aware(dt, timezone.get_current_timezone())
+[969] Normal: return date_time
+[972] Normal: def _serialize_activity(activity,current_user =None):
+[973] Normal: is_registered = False
+[974] Normal: is_favorited = False
+[975] Normal: If current_user: and if current_ userr.is_authenticate():
+[976] Normal: is_registered = activity.registrations.filter(user=current_ust).exist()
+[977] Normal: is_favorited = Favorite.objects.filter(
+[978] Normal: user=current_user,
+[979] Normal: target_type=FavoriteTargetType.ACTIVITY,
+[980] Normal: target_id=activity.id,
+[981] Normal: )exists():
+[983] Normal: return {
+[984] Normal: 'id': activity.id,
+[985] Normal: 'title':activity. title,
+[986] Normal: 'activity_type': activity.activity_type,
+[987] Normal: 'content': activity.content,
+[988] Normal: 'location': activity.location,
+[989] Normal: 'latitude': float(activity.latitude) if activity.latitude is not None else None,
+[990] Normal: 'longitude': float(activity.longitude) if activity.longitude != None else None,
+[991] Normal: 'start_time': str(activity.start_time),
+[992] Normal: 'end_time': activity.end_timeisoformat(),
+[993] Normal: 'signup deadline':activity.signup_deadlineisoformat(),
+[994] Normal: 'status': activity.status,
+[995] Normal: 'organizer': {
+[996] Normal: 'id':activity. organizer_id,
+[997] Normal: 'username': activity.organaizer.username,
+[998] Normal: 'nickname': activity.organizer.nickname,
+[999] Normal: },
+[1000] Normal: 'registration_count': activity.registration.all().count(),
+[1001] Normal: 'is_registered': is_registered,
+[1002] Normal: 'is_favorited': is_favorited,
+[1003] Normal: 'created_at': activity.created_at.isoformat(),
+[1004] Normal: }
+[1007] Normal: @require_http_method(["GET"])
+[1008] Normal: def index(_request):
+[1009] Normal: return JsonResponse({ ‘module’:‘activities’,’status’: ’ready’, })
+[1012] Normal: @csrf_exempt
+[1013] Normal: @require_http_methods(['GET', 'POST'])
+[1014] Normal: def activity_list(request):
+[1015] Normal: if request.method == "GET":
+[1016] Normal: queryset = queryset.select_related('organizer').prefetch_related('registrations')
+[1017] Normal: keyword = request. GET. get('keyword', '').strip()
+[1018] Normal: activity_type=(request. GET. get('activity_type', '' ) .strip()
+[1019] Normal: status = request. GET. get('status') or''strip()
+[1021] Normal: if keyword:
+[1022] Normal: queryset = queryset.filter(title__icontains=keyword)
+[1023] Normal: if (activity_type):
+[1024] Normal: queryset = queryset.filter(activity_type=activity_type)
+[1025] Normal: if statu:
+[1026] Normal: queryset = queryset.filter(stusis=status)
+[1028] Normal: data = [ _serialize_activity(activity, request.user )for activity in queryset]
+[1029] Normal: return JsonResponse({'items': data})
+[1031] Normal: if (not request.user.is_authenticated):
+[1032] Normal: return _json_error('请先登录。', status=401)
+[1034] Normal: payload = parse_json(request)
+[1035] Normal: if not payload:
+[1036] Normal: return _json_error('请求体必须是合法 JSON。')
+[1038] Normal: required_fields = [‘title’, ‘activity_type’, ‘content’, ‘location’, ‘start_time’, ‘end_time’, ‘signup_deadline’]
+[1039] Normal: missing = [ field for field in required_fields if field not in payload]
+[1040] Normal: If Missing:
+[1041] Normal: return _json_error(f'缺少必要字段: {", ".join(missing)}。')
+[1043] Normal: try:
+[1044] Normal: start_time= _parse_client_datetime(payload. get（"start_time），"start_ timE)：
+[1045] Normal: end_time = _parse_client_datetime(payload. get('end_time', 'end_time'))
+[1046] Normal: signup_deadline = parse_client_dt(payload.get('signup deadline'),'signup_ deadline')
+[1047] Normal: except ValueError as exc:
+[1048] Normal: return _json_error(str(exc))
+[1050] Normal: if end_time <= start_time:
+[1051] Normal: return _json_error('活动结束时间必须晚于开始时间。')
+[1052] Normal: if signup_deadline > start_time:
+[1053] Normal: return _json_error('报名截止时间不能晚于活动开始时间。')
+[1055] Normal: activity = Activity.objects.create(
+[1056] Normal: organizer=request.user,
+[1057] Normal: title=payload['title'].strip(),
+[1058] Normal: activitytype=payload['actitype’];
+[1059] Normal: payload['content'].strip(),
+[1060] Normal: location=payload[“location”].strip(),
+[1061] Normal: latitude=payload.get('latitude'),
+[1062] Normal: longitude=payload.get("longitude"),
+[1063] Normal: start_time=start_time,
+[1064] Normal: end_time=end_time,
+[1065] Normal: signup_deadline=signup_deadline,
+[1066] Normal: status=payload.get('status') or Activity.Status.PUBLISHED,
+[1067] Normal: )
+[1068] Normal: return JsonResponse({"detail": 'activity published','activity': _serialize_activity(activity, request.user)}, status=201)
+[1071] Normal: @require_http_methond(['GET'])
+[1072] Normal: def activity_detail(request, activity_id):
+[1073] Normal: activity = get_object_or_404(Activity.objects.select_related(‘organizer’).prefetch_related(‘registrations’),pk=activity_id)
+[1074] Normal: return JsonResponse({"activity":serialize_activity(activity, user)})
+[1077] Normal: @require_http_method('GET')
+[1078] Normal: def my_published(request):
+[1079] Normal: if not request.user.is_authenticated:
+[1080] Normal: return _json_error('请先登录。', status=401)
+[1082] Normal: queryset = queryset.filter(organizer=request.user).select_organizer().prefetch_registrations();
+[1083] Normal: return JsonResponse({'items':[serialize_ activity(activity,request. User) for activity in queryset ]})
+[1086] Normal: @require_http_method("GET")
+[1087] Normal: def my_registered(request):
+[1088] Normal: if not request.user.is_authenticated:
+[1089] Normal: return _json_error('请先登录。', status=401)
+[1091] Normal: queryset = queryset.filter(registrations__user=request.user).select_related('organizer').prefetch_related("registrations").distinct()
+[1092] Normal: return JsonResponse({"items": [_serialize_activity( activity, request. u ser) for activity in queryset]})
+[1095] Normal: @csrf_exempt
+[1096] Normal: @require_http_method('POST')
+[1097] Normal: def register_activity(request, activity_id):
+[1098] Normal: if not request.user.is_authenticated:
+[1099] Normal: return _json_error('请先登录。', status=401)
+[1101] Normal: activity = get_object_or_404(Activity, pk=activity_id)
+[1102] Heading 2: 1.9 视频模块核心视图代码
+[1103] Normal: import json
+[1105] Normal: from django.http import JsonResponse
+[1106] Normal: from django. shortcuts import get_object_or_404
+[1107] Normal: from django.views.decorators.csrf import csrf__exempt
+[1108] Normal: from django.views.decorators.http import require_http_methodas require_http_mehtods
+[1110] Normal: from users. models importFavorite
+[1112] Normal: from. models import Video, VideoComment
+[1115] Normal: def _json_error(self, message,status=400):
+[1116] Normal: return JsonResponse({'detail': message},status = status)
+[1119] Normal: def _parse_json(request):
+[1120] Normal: if not request.body:
+[1121] Normal: return {}
+[1123] Normal: try:
+[1124] Normal: return json.loads(request.body)
+[1125] Normal: except json.JSONDecodeError:
+[1126] Normal: return None;
+[1129] Normal: def _serialize_video(video,current_user =None):
+[1130] Normal: is_favorited = False
+[1131] Normal: if current_user &amp;&amp; current_ user.is_authenticated):
+[1132] Normal: is_favorited = Favorite.objects.filter(
+[1133] Normal: user=current_uesr,
+[1134] Normal: target_type=Favorite.TargetType.VIDEO,
+[1135] Normal: target_id=video.id,
+[1136] Normal: ).exists():
+[1138] Normal: return {
+[1139] Normal: 'id': video.id,
+[1140] Normal: 'title':video. title,
+[1141] Normal: 'description': video.description,
+[1142] Normal: 'video_file': video.video_file.name,
+[1143] Normal: 'cover_image': video.cover_image.name if video.cover_ image else None,
+[1144] Normal: 'like_count':video. like_count,
+[1145] Normal: 'favorite_count': video.favorite_count,
+[1146] Normal: 'comment_count': video.comment_count,
+[1147] Normal: 'User': {
+[1148] Normal: 'id':video. user_id,
+[1149] Normal: 'username': video.username,
+[1150] Normal: 'nickname':video.user. nickname,
+[1151] Normal: },
+[1152] Normal: 'is_favorited': is_favorited,
+[1153] Normal: 'created_at': str(video.created_at),
+[1154] Normal: }
+[1157] Normal: def _serialize_comment(comment):
+[1158] Normal: return {
+[1159] Normal: 'id': comment.id,
+[1160] Normal: 'content': comment.content,
+[1161] Normal: 'user': {
+[1162] Normal: 'id': comment.user_id,
+[1163] Normal: setUsername': comment.user.
+[1164] Normal: 'nickname':comment.user. Nickname,
+[1165] Normal: },
+[1166] Normal: 'created_at': comment.created_at.isoformat(),
+[1167] Normal: }
+[1170] Normal: @require_http_methords(‘GET’)
+[1171] Normal: def index(_request):
+[1172] Normal: return JsonResponse({'module': 'Videos', 'Status': "Ready"})
+[1175] Normal: @csrf_exempt
+[1176] Normal: @require_http_methods(['GET', 'POST'])
+[1177] Normal: def video_list(request):
+[1178] Normal: if request.method == "GET":
+[1179] Normal: queryset = queryset.select_related(user)
+[1180] Normal: keyword = request.GET.get("keyword") or '').strip()
+[1181] Normal: if keyword:
+[1182] Normal: queryset = queryset.filter(title__icontains=keyword)
+[1183] Normal: return JsonResponse({'items': [serialize_video(v,request.user)for v in queryset]})
+[1185] Normal: if (not request.user.is_authenticated):
+[1186] Normal: return _json_error('请先登录。', status=401)
+[1188] Normal: payload = _parse_json(request)
+[1189] Normal: if not payload:
+[1190] Normal: return _json_error('请求体必须是合法 JSON。')
+[1192] Normal: title = payload.get('title', '').strip():
+[1193] Normal: video_file = payload.get('video_file') or ''.strip()
+[1194] Normal: if not title or not video_file:
+[1195] Normal: return _json_error('标题和视频地址不能为空。')
+[1197] Normal: video = Video.objects.create(
+[1198] Normal: user=request.user,
+[1199] Normal: title=title,
+[1200] Normal: video_file=video_file,
+[1201] Normal: description=(payload.get("description") or "").strip(),
+[1202] Normal: )
+[1203] Normal: Return json Response({ 'detail':' the video has been published', _ serialize_:video(video, user)}, status= 201):
+[1206] Normal: @require_http_methonds(['GET'])
+[1207] Normal: def video_detail(request, video_id):
+[1208] Normal: video = get_object_or_404(Video.objects.select_related("user"),pk=video_id)
+[1209] Normal: comments = video.video_comments.select_relate("user")
+[1210] Normal: return JsonResponse(
+[1211] Normal: {
+[1212] Normal: "video": _serialize_video(video, user),
+[1213] Normal: "comments": [_serialize_comment(comment) for comment in comments],
+[1214] Normal: }
+[1215] Normal: )
+[1218] Normal: @require_http_mthods(['GET'])
+[1219] Normal: def my_videos(request):
+[1220] Normal: if (not request.user.is_authenticated):
+[1221] Normal: return _json_error('请先登录。', status=401)
+[1223] Normal: queryset = queryset.filter(user__==request.user).select_relaed('user')
+[1224] Normal: return JsonResponse({"items":[{"id":video.id, "title":video.title,"thumbnail":request.,”url”,“user”:self.serializer.user} for video in queryset])):
+[1227] Normal: @csrf_exempt
+[1228] Normal: @require_http_method("POST")
+[1229] Normal: def like_video(request, video_id):
+[1230] Normal: if (not request.user.is_authenticated):
+[1231] Normal: return _json_error('请先登录。', status=401)
+[1233] Normal: video = get_object_or_404(Video,pk=video_id)
+[1234] Normal: video. like_ count++
+[1235] Normal: video.save(UPDATE_LIKE_COUNT)
+[1236] Normal: return JsonResponse({'detail': '点赞成功。', 'like_count': video.like_count})
+[1239] Normal: @csrf_exempt
+[1240] Normal: @require_http_method('POST')
+[1241] Normal: def favorite_video(request, video_id):
+[1242] Normal: if (not request.user.is_authenticated):
+[1243] Normal: return _json_error('请先登录。', status=401)
+[1245] Normal: video = get_object_or_404(Video,pk=video_id)
+[1246] Normal: favorite,created = Favorite.objects.get_or_create(
+[1247] Normal: user=request.user,
+[1248] Normal: target_type=Favorite.TargetType.VIDEO,
+[1249] Normal: target_id=video.id,
+[1250] Normal: )
+[1251] Normal: if not made:
+[1252] Normal: return _json_error('你已收藏该视频。')
+[1254] Normal: video.favorite_count += 1
+[1255] Normal: video.save(update__favorite=True)
+[1256] Normal: return JsonResponse({'detail': '收藏成功。', 'favorite_id': favorite.id, 'favorite_count': video.favorite_count}, status=201)
+[1259] Normal: @csrf_exempt
+[1260] Normal: @require_http_method(['POST'])
+[1261] Normal: def comment_video(request, video_id):
+[1262] Normal: if (not request.user.is_authenticated):
+[1263] Normal: return _json_error('请先登录。', status=401)
+[1265] Normal: payload = _parse_json(request)
+[1266] Normal: if not payload:
+[1267] Normal: return _json_error('请求体必须是合法 JSON。')
+[1269] Normal: content = payload.get('content') or '' strip():
+[1270] Normal: if not content:
+[1271] Normal: return _json_error('评论内容不能为空。')
+[1272] Heading 2: 1.10 社交模块核心视图代码
+[1273] Normal: import json
+[1275] Normal: from django.http import JsonResponse
+[1276] Normal: from django. shortcuts import get_object_or_404
+[1277] Normal: from django.views.decorators.csrf importcsrf_ex...
+[1278] Normal: from django.views.decorators.http import require_http_metho
+[1280] Normal: from. models import ChatMessage，ChatRoom
+[1282] Normal: DEFAULT_ROOMS = [
+[1283] Normal: ('舞房招聘', ChatRoom.Category.STUDIO_RECRUITMENT),
+[1284] Normal: ('舞蹈心得交流', ChatRoom.Category.EXPERIENCE_SHARING),
+[1285] Normal: ('比赛经验', ChatRoom.Category.CONTEST_EXPERIENCE),
+[1286] Normal: ('Hiphop', 'HIPHOP'),
+[1287] Normal: ('Swag', 'ChatRoom.SWAG'),
+[1288] Normal: ('Jazz', 'ChatRoom.JAZZ')
+[1289] Normal: ('Popping', 'POPPING'),
+[1290] Normal: ('Locking', 'ChatRoom.LOCKING'),
+[1291] Normal: ('Breaking',ChatRoom. Category.BREAKING)
+[1292] Normal: ('其他舞蹈分类', ChatRoom.Category.OTHER),
+[1293] Normal: ]
+[1296] Normal: def _ensure_default_room():
+[1297] Normal: for room_name,category in DEFAULT_ROOMS:
+[1298] Normal: ChatRoom.objects.get_or_create(category=category, defaults={'room_name'：room_name })
+[1301] Normal: def _json_errro(msg, status=400):
+[1302] Normal: return JsonResponse({'detail': message},status=status)
+[1305] Normal: def _parse_json(request):
+[1306] Normal: if not request.body:
+[1307] Normal: return {}
+[1309] Normal: try:
+[1310] Normal: return json.loads(request.body)
+[1311] Normal: except json.JSONDecodeError:
+[1312] Normal: Return none:
+[1315] Normal: def _serialize_room(room):
+[1316] Normal: return {
+[1317] Normal: 'id': room.id,
+[1318] Normal: 'room_name': room.room_name,
+[1319] Normal: 'category': room.category,
+[1320] Normal: 'description':room. description,
+[1321] Normal: 'created_at': room.created_at.isoformat(),
+[1322] Normal: }
+[1325] Normal: def _serialize_message(message):
+[1326] Normal: return {
+[1327] Normal: 'id': message.id,
+[1328] Normal: 'content': message.content,
+[1329] Normal: 'User': {
+[1330] Normal: 'id': message.user_id,
+[1331] Normal: 'username': message.user.
+[1332] Normal: 'nickname': message.user.nickname,
+[1333] Normal: },
+[1334] Normal: 'sent_at': message.sent_at.isoformat(),
+[1335] Normal: }
+[1338] Normal: @require_http_mehods(['GET'])
+[1339] Normal: def index(_request):
+[1340] Normal: return JsonResponse({'module': 'social', 'status': 'ready'})
+[1343] Normal: @require_http_method('GET')
+[1344] Normal: def room_list(_request):
+[1345] Normal: _ensure_default_rooms()
+[1346] Normal: rooms = ChatRoom.objects.all()
+[1347] Normal: return JsonResponse({'items': [_serialize_room(room) for room in rooms]})
+[1350] Normal: @require_http_methonds(['GET'])
+[1351] Normal: def room_detail(_request, room_id):
+[1352] Normal: _ensure_default_rooms()
+[1353] Normal: room = get_object_or_404(ChatRoom,pk=room_id)
+[1354] Normal: messages = room.messages.select_just_right(user)
+[1355] Normal: return JsonResponse({'room':_serialize_room(room),'messages':[ _serialize_message(msg)for msg in messages ] })
+[1358] Normal: @csrf_exempt
+[1359] Normal: @require_http_methonds(['POST'])
+[1360] Normal: def send_message(request, room_id):
+[1361] Normal: if (not request.user.is_authenticated):
+[1362] Normal: return _json_error('请先登录。', status=401)
+[1364] Normal: payload = _parse_json(request)
+[1365] Normal: if payload == None:
+[1366] Normal: return _json_error('请求体必须是合法 JSON。')
+[1368] Normal: content = payload.get("content") or ''; content.strip();
+[1369] Normal: if not content:
+[1370] Normal: return _json_error('消息内容不能为空。')
+[1372] Normal: _ensure_default_rooms()
+[1373] Normal: room = get_object_or_404(ChatRoom,pk=room_id)
+[1374] Normal: message = ChatMessage.objects.create(room=room,user=request.user,content=content)
+[1375] Normal: return JsonResponse({'detail': '发送成功。', 'message': _serialize_message(message)}, status=201)
+[1376] Heading 2: 1.11 商城模块核心视图代码
+[1377] Normal: import json
+[1378] Normal: from decimal import *
+[1380] Normal: from django.db import transaction
+[1381] Normal: from django.http import JsonResponse
+[1382] Normal: from django. shortcuts import get_object_or_404
+[1383] Normal: from django.views.decorators.csrf import csrf__exempt
+[1384] Normal: from django.views.decorators.http import require_http_metho
+[1386] Normal: from. models import CartItem, Order,Order Item, Product
+[1389] Normal: def _json_errror(message, status=400):
+[1390] Normal: return JsonResponse({'detail': message},status = status)
+[1393] Normal: def _parse_json(request):
+[1394] Normal: if not request.body:
+[1395] Normal: return {}
+[1397] Normal: try:
+[1398] Normal: return json.loads(request.body)
+[1399] Normal: except json.JSONDecodeError:
+[1400] Normal: Return None:
+[1403] Normal: def _serialize_product(product):
+[1404] Normal: return {
+[1405] Normal: 'id': product.id,
+[1406] Normal: 'name': product.name,
+[1407] Normal: 'category': product.category,
+[1408] Normal: 'price': str(product.price),
+[1409] Normal: 'stock':product. stock,
+[1410] Normal: 'description': product.description,
+[1411] Normal: 'status': product.status,
+[1412] Normal: 'created_at': product.created_at.isoformat(),
+[1413] Normal: }
+[1416] Normal: def _serialize_cart_item(item):
+[1417] Normal: return {
+[1418] Normal: 'id': item.id,
+[1419] Normal: 'quantity': item.quantity,
+[1420] Normal: 'product': _serialize_product(item.product),
+[1421] Normal: 'subtotal': str(item.product.price * item.quantity),
+[1422] Normal: }
+[1425] Normal: def _serialize_order(order):
+[1426] Normal: return {
+[1427] Normal: 'id': order.id,
+[1428] Normal: 'total_amount': str(order.total_amount),
+[1429] Normal: order_status: order.order_status,
+[1430] Normal: 'payment_status': order.payment_status,
+[1431] Normal: 'items': [
+[1432] Normal: {
+[1433] Normal: 'id': item.id,
+[1434] Normal: 'quantity': item.quantity,
+[1435] Normal: 'unit_price': str(item.unit_price),
+[1436] Normal: 'product':_serialize_product(item. product),
+[1437] Normal: }
+[1438] Normal: for item in order.items.select_related('product')
+[1439] Normal: ],
+[1440] Normal: 'created_at': order.created_at.isoformat(),
+[1441] Normal: }
+[1444] Normal: @require_http_methonds(['GET'])
+[1445] Normal: def index(_request):
+[1446] Normal: returnJsonResponse({"mod": "mall", "str": "ok"})
+[1449] Normal: @csrf_exempt
+[1450] Normal: @require_http_methods(['GET', 'POST'])
+[1451] Normal: def product_list(request):
+[1452] Normal: if request.method == "GET":
+[1453] Normal: queryset = Product.objects.all()
+[1454] Normal: keyword=(request. GET. get('keyword') or '').strip()
+[1455] Normal: if keyword:
+[1456] Normal: queryset = queryset.filter(name__icontains=keyword)
+[1457] Normal: return JsonResponse({'items': [_serialize_product(product) for product in queryset]})
+[1459] Normal: if not request.user.is_authenticated:
+[1460] Normal: return _json_error('请先登录。', status=401)
+[1462] Normal: payload = _parse_json(request)
+[1463] Normal: if payload is None:
+[1464] Normal: return _json_error('请求体必须是合法 JSON。')
+[1466] Normal: required_fields = [‘name’, ‘category’, 'price’，'stock’]
+[1467] Normal: missing = [f for f in required_fields if payload.get(f) is None or not payload.get(f)]
+[1468] Normal: If Missing:
+[1469] Normal: return _json_error(f'缺少必要字段: {", ".join(missing)}。')
+[1471] Normal: product = Product.objects.create(
+[1472] Normal: name=payload. get('name')or'', name=strip(),
+[1473] Normal: category=(payload.get("category") or "").strip(),
+[1474] Normal: price=Decimal(str(payload.get('price'))),
+[1475] Normal: stock=int(payload.get('stock')),
+[1476] Normal: description=(payload.get("description") or "").strip(),
+[1477] Normal: status=payload.get('status') or Product.Status.ON_SALE,
+[1478] Normal: )
+[1479] Normal: return JsonResponse({"detail": "created product.", "product": _serialize_product(product)}, status=201)
+[1482] Normal: @require_http_method(["GET"])
+[1483] Normal: def product_detail(_request, product_id):
+[1484] Normal: product = get_object_or_404(Product,pk=product_id)
+[1485] Normal: return JsonResponse({'product': _serialize_product(product)})
+[1488] Normal: @csrf_exempt
+[1489] Normal: @require_http_methods(['GET', 'POST'])
+[1490] Normal: def cart_items(self):
+[1491] Normal: if not request.user.is_authenticated:
+[1492] Normal: return _json_error('请先登录。', status=401)
+[1494] Normal: if request.method == 'GET':
+[1495] Normal: items = CartItem.objects.filter(user=request.user).select__related(‘product’);
+[1496] Normal: return JsonResponse({'items': [_serialize_cart_item(i) for i in items]})
+[1498] Normal: payload = _parse_json(request)
+[1499] Normal: if payload == None:
+[1500] Normal: return _json_error('请求体必须是合法 JSON。')
+[1502] Normal: product = get_object_or_404(Product,pk= payload.get("product_id"))
+[1503] Normal: quantity = payload.get('quantity', 1) or 1:
+[1504] Normal: if (quantity <= 0):
+[1505] Normal: return _json_error('商品数量必须大于 0。')
+[1506] Normal: if product. stock< quantity:
+[1507] Normal: return _json_error('库存不足。')
+[1509] Normal: cart_item,created =CartItem. objects. get_or_create(
+[1510] Normal: user=request.user,
+[1511] Normal: product=product,
+[1512] Normal: defaults={'quantity': quantity},
+[1513] Normal: )
+[1514] Normal: if not made:
+[1515] Normal: cart_item.quantity += quantity
+[1516] Normal: if cart_item.quantity > product. stock:
+[1517] Normal: return _json_error('库存不足。')
+[1518] Normal: cart_item.save(‘update’=[quantity])
+[1520] Normal: return JsonResponse({'detail': '已加入购物车。', 'item': _serialize_cart_item(cart_item)}, status=201)
+[1523] Normal: @csrf_exempt
+[1524] Normal: @require_http_method(["POST"])
+[1525] Normal: def create_order(request):
+[1526] Normal: if not request.user.is_authenticated:
+[1527] Normal: return _json_error('请先登录。', status=401)
+[1529] Normal: cart_51s = caii7t.06g.s3lect_rlatefivc('roduct',u.seR=request.usre)
+[1530] Normal: cart_items_list = list(cart_qs)
+[1531] Normal: if not cart_items_list:
+[1532] Normal: return _json_error('购物车为空。')
+[1534] Normal: with transaction.atomic():
+[1535] Normal: total_amount = Decimal('0.00')
+[1536] Normal: order = Order.objects.create(user=request.user,total_amount=Decimal(0.00))
+[1538] Normal: for cart_item in cart_items_list:
+[1539] Normal: product = cart_item.product
+[1540] Normal: if product. stock<cart_item.quantity:
+[1541] Normal: raise ValueError(f'{product.name} 库存不足。')
+[1542] Normal: product.stock -= cart_item.quantity
+[1543] Normal: product.save(update_stock=True)
+[1544] Normal: order_items.create():
+[1545] Normal: order=order,
+[1546] Normal: product=product,
+[1547] Normal: quantity=cart_item.quantity,
+[1548] Normal: unit_price=product.price,
+[1549] Normal: )
+[1550] Normal: total_amount += product.price * cart_item.quantity
+[1552] Normal: order.total_amount = total_amount;
+[1553] Normal: Order.save('u’tot_alamount')
+[1554] Normal: cart_qs.delete()
+[1556] Normal: return JsonResponse({'detail': '订单创建成功。', 'order': _serialize_order(order)}, status=201)
+[1557] Heading 2: 1.12 用户数据模型代码
+[1558] Normal: import django.contrib.auth.models as auth_models:AbstractUser:
+[1559] Normal: from django.db import models
+[1562] Normal: class User(AbstractUser):
+[1563] Normal: class Gender(models.TextChoices):
+[1564] Normal: MALE = 'male', '男'
+[1565] Normal: FEMALE = 'female', '女'
+[1566] Normal: OTHER = 'other', '其他'
+[1567] Normal: UNKNOWN = 'unknown', '保密'
+[1569] Normal: nickname = models.CharField(max_length=50,blank=True)
+[1570] Normal: avatar = models. ImageField(upload_to='avatars/', blank=True, null=True)
+[1571] Normal: gender = models.CharField(max_length=10, choices=Gender.choices, default=Gender.UNKNOWN)
+[1572] Normal: phone: str = models.CharField(max_length=20, blank=True)
+[1573] Normal: profile=models.TextField( blank=True, )
+[1575] Normal: def __str__(self):
+[1576] Normal: return self.nickname or self.username
+[1579] Normal: class Favorite(models.Model):
+[1580] Normal: TargetType(models. TextChoices):
+[1581] Normal: ACTIVITY = 'activity', '活动'
+[1582] Normal: VIDEO = 'video', '视频'
+[1584] Normal: user = models.ForeignKey('users. User',on_delete=models. CASCADE,related_name='favorites' )
+[1585] Normal: target_type = models.CharField(max_length=20,choices= TargetType. choices)
+[1586] Normal: target_id = models.IntegerField(Positive=True)
+[1587] Normal: created_at = models.DateTimeField(auto_now_add=True),
+[1589] Normal: class Meta:
+[1590] Normal: ordering = ['-created_at']
+[1591] Normal: unique_together = ("user", "target_type", "target_id")
+[1593] Normal: def __str__(self):
+[1594] Normal: return f'{self.user} – > {self.target_type}:{self.target_id}'
+[1597] Normal: class Follow(models.Model):
+[1598] Normal: follower = models.ForeignKey(to='users.User',on_delete=models.CASCADE,related_name="following_relationshi p")
+[1599] Normal: following = model. ForeignKey('user.souser',on_delete=models.Cascade)related_namew Following
+[1600] Normal: created_at: models. DaterimeFielD(AutonoW_@dd=True):
+[1602] Normal: class Meta:
+[1603] Normal: ordering = ['-created_at']
+[1604] Normal: unique_together = ("follower","following")
+[1606] Normal: def __str__(self):
+[1607] Normal: return f'{self.follower} follows {self.following}'
+[1608] Heading 2: 1.13 活动数据模型代码
+[1609] Normal: from django. settings import *
+[1610] Normal: from django.db import models
+[1613] Normal: class Activity(models.Model):
+[1614] Normal: ActivityType=models. TextChoices
+[1615] Normal: COMPETITION = 'competition', '比赛'
+[1616] Normal: COMMERCIAL = 'commercial', '商演'
+[1617] Normal: PERFORMANCE = 'performance', '表演'
+[1618] Normal: BACKUP_DANCER = 'backup_dancer', '伴舞'
+[1619] Normal: OTHER = 'other', '其他'
+[1621] Normal: class Status(models.TextChoice)
+[1622] Normal: DRAFT = 'draft', '草稿'
+[1623] Normal: PUBLISHED = 'published', '已发布'
+[1624] Normal: FINISHED = 'finished', '已结束'
+[1625] Normal: CANCELLED = 'cancelled', '已取消'
+[1627] Normal: organizer = models.ForeignKey(AUTH. USER. MODEL，on_delete=DO\_NOTHING，null\=\-True)
+[1628] Normal: title = models.CharField(max_length=200)
+[1629] Normal: activity_type = models.CharField(max_length=30,choices= ActivityType. choices)
+[1630] Normal: cover_image = models.ImageField( upload_to='activities/' ,blank=True,null= True)
+[1631] Normal: content = models.TextField()
+[1632] Normal: location =models. CharField(max_length=255)
+[1633] Normal: latitude = models. DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
+[1634] Normal: longitude = models.DecimalField(max_digits=9, decimal_places=6, blank=True, null=True)
+[1635] Normal: start_time = models.DateTimeField()
+[1636] Normal: end_time = models.DateTimeField()
+[1637] Normal: signup_deadline = models.DateTimeField()
+[1638] Normal: status=models.CharField(max_length=20, choices=Status.choices ,default = Status.DRAFT)
+[1639] Normal: created_at: “DatetimeField”,”auto_now_add”: True,
+[1640] Normal: updated_at = models.DateTimeField(auto_now=True),
+[1642] Normal: class Meta:
+[1643] Normal: ordering = ['-start_time', '-created_at']
+[1645] Normal: def __str__(self):
+[1646] Normal: return self.title
+[1649] Normal: Activity Registration:
+[1650] Normal: activity=models.ForeignKey(Activity, on delete=models.CASCADE)，registratiom
+[1651] Normal: user:= models.ForeignKey(to=settings.AUTH_USER_MODEL, on_delete=models.C A ScADE, re lated_name='activity_registratio
+[1652] Normal: signup_time = models.DateTimeField(auto_now_add=True)
+[1653] Normal: checked_in = BooleanField()
+[1654] Normal: checked_in_at = models.DateTimeField(blank=True, null=Tru
+[1656] Normal: class Meta:
+[1657] Normal: ordering = ['-signup_time']
+[1658] Normal: unique_together = ('activity', 'user')
+[1660] Normal: def __str__(self):
+[1661] Normal: return f'{self.user} -> {self.activity}'
+[1662] Heading 2: 1.14 视频数据模型代码
+[1663] Normal: from django. conf:
+[1664] Normal: from django.db import models
+[1667] Normal: class Video():
+[1668] Normal: user = models.ForeignKey(settings. AUTH\_USER \_MODEL,\* on\_delete=MODEl.CADESCLE\*,related-\_name="videos")
+[1669] Normal: title = models.CharField(max_length=200)
+[1670] Normal: video_file = files.Filed(upload_to='v')
+[1671] Normal: cover_image=models.ImageField( upload_to= 'video_cover',blank=True, null=True)
+[1672] Normal: description = models.TextField(blank=True)
+[1673] Normal: like_count = PositiveIntegerField(default=0)
+[1674] Normal: favorite_count = PositiveIntegerField()
+[1675] Normal: comment_count = PositiveIntegerField(default=0),
+[1676] Normal: created_at: =model. DateTimefield(Autonow_add=True)
+[1677] Normal: updated_at: datetime. DateTimeField(auto_now=True)
+[1679] Normal: class Meta:
+[1680] Normal: ordering = ['-created_at']
+[1682] Normal: def __str__(self):
+[1683] Normal: return self.title
+[1686] Normal: class VideoComment(models.Model):
+[1687] Normal: video:models.ForeignKey(Video, on_delete = models. CASCADE,related_name=’comments’,)
+[1688] Normal: user=models.ForeignKey(settings.AUTH_USER_MODEl,on DELETE=mo dels.CACADE,RElated_ NAMEM'vide o _COMments')
+[1689] Normal: content = models.TextField();
+[1690] Normal: created_at = models.DateTimeField(auto_now_add=True),
+[1692] Normal: class Meta:
+[1693] Normal: ordering = ['-created_at']
+[1695] Normal: def __str__(self):
+[1696] Normal: return f"{self.user} in {self.video}"
+[1697] Heading 2: 1.15 社交数据模型代码
+[1698] Normal: from django. conf
+[1699] Normal: from django.db import models
+[1702] Normal: class ChatRoom(models.Model):
+[1703] Normal: class Category(models.TextChoiceEnum):
+[1704] Normal: STUDIO_RECRUITMENT = 'studio_recruitment', '舞房招聘'
+[1705] Normal: EXPERIENCE_SHARING = 'experience_sharing', '舞蹈心得交流'
+[1706] Normal: CONTEST_EXPERIENCE = 'contest_experience', '比赛经验'
+[1707] Normal: HIPHOP = "hiphop", "Hiphop"
+[1708] Normal: SWAG = 'swag', 'Swag'
+[1709] Normal: JAZZ = ‘jazz’, ‘Jazz’
+[1710] Normal: POPPING = 'poppin', 'Pop'
+[1711] Normal: LOCKING = "locking", "Locking"
+[1712] Normal: BREAKING = breaking,Breaking
+[1713] Normal: OTHER = 'other', '其他'
+[1715] Normal: name = models.CharField(max_length=100)
+[1716] Normal: category =models.CharField( max_length=30 , choices=Category.choices, unique=True)
+[1717] Normal: description = models.TextField(blank=True)
+[1718] Normal: created_at = models.DateTimeField(auto_now_add=True)
+[1720] Normal: class Meta:
+[1721] Normal: ordering = ['room_name']
+[1723] Normal: def __str__(self):
+[1724] Normal: return self.room_name
+[1727] Normal: class ChatMessage(models.Model):
+[1728] Normal: room = ForeignKey(ChatsRoom, on_delete=CASCADE, related_name="messages")
+[1729] Normal: user = models.ForeignKey(to=settings. AUTH_USER_MODE lon_delete=models.CASCADE，related_name='chat_messag')
+[1730] Normal: content = models.TextField();
+[1731] Normal: sent_at = models.DateTimeField(auto_now_add=True)
+[1733] Normal: class Meta:
+[1734] Normal: ordering = ['sent_at']
+[1736] Normal: def __str__(self):
+[1737] Normal: return f'{self.user} @ {self.room}'
+[1738] Heading 2: 1.16 商城数据模型代码
+[1739] Normal: from django. conf
+[1740] Normal: from django.db import models
+[1743] Normal: class Product(models.Model):
+[1744] Normal: Status:models. TextChoices
+[1745] Normal: DRAFT = 'draft', '草稿'
+[1746] Normal: ON_SALE = 'on_sale', '上架'
+[1747] Normal: SOLD_OUT = 'sold_out', '售罄'
+[1748] Normal: OFFLINE = 'offline', '下架'
+[1750] Normal: name = models.CharField(max_length=200)
+[1751] Normal: category = models.CharField(max_length=100)
+[1752] Normal: cover_image = models.ImageField( upload_to='products/',blank=True, null=True)
+[1753] Normal: price: models. DecimalField(max _digits=10，decimal. places=2)，
+[1754] Normal: stock = models.PositiveIntegerField(default=0)
+[1755] Normal: description = models.TextField(blank=True)
+[1756] Normal: status = models.CharField(max_length=20,choices =Status..choices,default= Status.DRAFT)
+[1757] Normal: created_at = models.DateTimeField(auto_now_add=True),
+[1758] Normal: updated_at = models.DateTimeField(auto_now=True),
+[1760] Normal: class Meta:
+[1761] Normal: ordering = ['-created_at']
+[1763] Normal: def __str__(self):
+[1764] Normal: return self.name
+[1767] Normal: class CartItem(models.Model):
+[1768] Normal: user=models.ForeignKey(settings.AUTH_USER_ MODEL， on_delete=MODELS. CASCADE, RELOJECTED。Cart_ITEMS)
+[1769] Normal: product: models. Foreignkey(Product, ondelete=models. Cascadeforeignkey。Related-name='carts')
+[1770] Normal: quantity = models.PositiveIntegerField(1)
+[1771] Normal: created_at:ModelField=DateTimeField(auto _now _add=True）：
+[1773] Normal: class Meta:
+[1774] Normal: ordering = ['-created_at']
+[1775] Normal: unique_together = ('user','product');
+[1777] Normal: def __str__(self):
+[1778] Normal: return f'{self.user} x {self.product}'
+[1781] Normal: class Order(models.Model):
+[1782] Normal: OrderStatus(models. TextChoices)
+[1783] Normal: PENDING = 'pending', '待处理'
+[1784] Normal: PAID = 'paid', '已支付'
+[1785] Normal: SHIPPED = 'shipped', '已发货'
+[1786] Normal: COMPLETED = 'completed', '已完成'
+[1787] Normal: CANCELLED = 'cancelled', '已取消'
+[1789] Normal: user=models.ForeignKey( settings.AUTH_USER_MODEIon,ona_delete=models. CASCADE，related_nameln'm orders ’)
+[1790] Normal: total_amount: models. DecimalField(max_digits=10，decimal_places = 2),
+[1791] Normal: order_status = models.CharField(max_length=20, choices=OrderStatus._choices(), default=OrderStatus.PENDING)
+[1792] Normal: payment_status:bool = FALSE;
+[1793] Normal: created_at = models.DatetImeFielD(auto_now_=_True)
+[1794] Normal: updated_at: datetime. DateTimeField(auto_now=True)
+[1796] Normal: class Meta:
+[1797] Normal: ordering = ['-created_at']
+[1799] Normal: def __str__(self):
+[1800] Normal: return f"Order #{self.pk}"
+[1803] Normal: class OrderItem(models.Model):
+[1804] Normal: order = models.ForeignKey(Order, on_delete=models.CASCADE, related_name=’items’)
+[1805] Normal: product = models.ForeignKey(Product, on_delete=PROTECT, related_name='order_items',)
+[1806] Normal: quantity = PositiveIntegerField(default=1)
+[1807] Normal: unit_price: models. DecimalField( max_digits=10,decimal_places=2)
+[1809] Normal: def __str__(self):
+[1810] Normal: return f'{self.order} - {self.product}'
+[1811] Heading 2: 1.17 演示数据初始化命令代码
+[1812] Normal: from datetime import timedelta
+[1813] Normal: from decimal import *
+[1815] Normal: import django.contrib.auth.models as auth_models from.
+[1816] Normal: from django.core.management. base import BaseCommand
+[1817] Normal: from django.utils import timezone
+[1819] Normal: from activities.models import Activity, ActivityRegistration
+[1820] Normal: from mall. models import CartItem, Order, OrderItem, Product
+[1821] Normal: from social. models import ChatMessage，ChatRoom
+[1822] Normal: from users. models import F avorite,Follow
+[1823] Normal: from videos. models import Video, VideoComment
+[1826] Normal: User = get_user_model()
+[1829] Normal: class Command(BaseCommand):
+[1830] Normal: help = "Seed demo data for street dance."
+[1832] Normal: def handle(self, *args, **kwargs):
+[1833] Normal: now = timezone.now();
+[1835] Normal: admin_user, _ = User. get_or_create(
+[1836] Normal: username='admin_demo',
+[1837] Normal: defaults={
+[1838] Normal: 'nickname': '平台管理员',
+[1839] Normal: 'email': 'admin@example.com',
+[1840] Normal: "is_staff": true,
+[1841] Normal: "Is_superuser": true,
+[1842] Normal: 'phone': '13800000000',
+[1843] Normal: 'profile': '负责演示数据维护',
+[1844] Normal: },
+[1845] Normal: )
+[1846] Normal: admin_user.set_password('Admin123456')
+[1847] Normal: admin_user.save()
+[1849] Normal: dancer, _ = User.objects.get_or_
+[1850] Normal: username='bboy_chen',
+[1851] Normal: defaults={
+[1852] Normal: 'nickname': 'Bboy Chen',
+[1853] Normal: 'email': 'bboychen@example.com',
+[1854] Normal: 'phone': '13900000001',
+[1855] Normal: 'profile': '擅长 breaking 和 freestyle',
+[1856] Normal: },
+[1857] Normal: )
+[1858] Normal: dancer.setPassword("Dance123456");
+[1859] Normal: dancer.save()
+[1861] Normal: organizer, _ = User.objects.get_or_
+[1862] Normal: username=studio_muse,
+[1863] Normal: defaults={
+[1864] Normal: 'nickname': 'Muse Studio',
+[1865] Normal: 'email': 'muse@example.com',
+[1866] Normal: 'phone': '13900000002',
+[1867] Normal: 'profile': '主办赛事和公开课活动',
+[1868] Normal: },
+[1869] Normal: )
+[1870] Normal: organizer.set_password(Dance123456)
+[1871] Normal: organizer.save()
+[1873] Normal: viewer, _=User. objects.get_or_create(
+[1874] Normal: username=’jazz_luna’,
+[1875] Normal: defaults={
+[1876] Normal: 'nickname': 'Jazz Luna',
+[1877] Normal: 'email': 'luna@example.com',
+[1878] Normal: 'phone': '13900000003',
+[1879] Normal: 'profile': '喜欢 Jazz 和编舞分享',
+[1880] Normal: },
+[1881] Normal: )
+[1882] Normal: viewer.set_password("Dance123456")
+[1883] Normal: viewer.save()
+[1885] Normal: Follow.objects.get_or_create(follower=viewer, following=dancer)
+[1886] Normal: Follow.objects.get_or_create(follower =dancer,following=organizer)
+[1888] Normal: activity_1, _ = Activity. get_or_create(
+[1889] Normal: organizer=organizer,
+[1890] Normal: title='2026 上海街舞公开赛',
+[1891] Normal: defaults={
+[1892] Normal: 'activity_type': Activity.ActivityType.COMPETITION,
+[1893] Normal: 'content': '面向 Hiphop、Breaking、Popping 选手开放报名。',
+[1894] Normal: 'location': '上海市黄浦区街舞中心',
+[1895] Normal: 'start_time': now + timedelta(days=10),
+[1896] Normal: 'end_time': now + timedelta(days=10, hours=6),
+[1897] Normal: 'signup_deadline': now + timedelta(days=7),
+[1898] Normal: 'status': Activity.Status.PUBLISHED,
+[1899] Normal: },
+[1900] Normal: )
+[1901] Normal: activity_2, _ = Activity.objects.get_or_create(
+[1902] Normal: organizer=organizer,
+[1903] Normal: title='周末 Jazz 编舞公开课',
+[1904] Normal: defaults={
+[1905] Normal: 'activity_type': Activity.ActivityType.PERFORMANCE,
+[1906] Normal: 'content': '适合初中级舞者，现场分组练习。',
+[1907] Normal: 'location': '上海市静安区舞蹈工坊',
+[1908] Normal: 'start_time': now + timedelta(days=5),
+[1909] Normal: 'end_time': now + timedelta(days=5,hours=3),
+[1910] Normal: 'signup_deadline': now + timedelta(days=3),
+[1911] Normal: 'status': Activity.Status.PUBLISHED,
+[1912] Normal: },
+[1913] Normal: )
+[1915] Normal: registration,_ =Activity. Registration.get_or_create(activity=activity1,user=dancer):
+[1916] Normal: if not registration.checked_in:
+[1917] Normal: registerd. checkedin= True
+[1918] Normal: registration.checked_in_at = now;
+[1919] Normal: save(updateFields:" checkedIn,checkedInAt");
+[1920] Normal: ActivityRegistration.objects.get_or_create(activity=activity_2,user =viewer)
+[1922] Normal: video_1, _ = Video. get_or_create(
+[1923] Normal: user=dancer,
+[1924] Normal: title='Breaking Showcase 2026'
+[1925] Normal: defaults=
+[1926] Normal: ‘video_file’: ‘videos/brakeging-showase.mp4’,
+[1927] Normal: 'description': '训练室版本作品记录',
+[1928] Normal: 'like_count': 18,
+[1929] Normal: 'favorite_count': 6,
+[1930] Normal: 'comment_count': 0,
+[1931] Normal: },
+[1932] Normal: )
+[1933] Normal: video_2, _ = Video. get_or_create(
+[1934] Normal: user=watcher,
+[1935] Normal: title='Jazz Choreo Demo',
+[1936] Normal: defaults={
+[1937] Normal: ‘video_file’:’videos/jazz-demo. MP4’
+[1938] Normal: 'description': '公开课课后作品',
+[1939] Normal: 'like_count': 9,
+[1940] Normal: 'favorite_count': 4,
+[1941] Normal: 'comment_count': 0,
+[1942] Normal: },
+[1943] Normal: )
+[1945] Normal: comment_1,created=VideoComment. objects. get_or_create(
+[1946] Normal: video=video_1,
+[1947] Normal: user=watcher,
+[1948] Normal: content='这段 power move 很干净。',
+[1949] Normal: )
+[1950] Normal: comment_2, _ = VideoComment.objects.get_or_create(
+[1951] Normal: video=video_2,
+[1952] Normal: user=dancer,
+[1953] Normal: content='节奏处理很舒服。',
+[1954] Normal: )
+[1955] Normal: if make:
+[1956] Normal: video_1.comment_count = video_1.comments.count()
+[1957] Normal: video_1.update_fields(comment_count)video_1.save()
+[1958] Normal: video_2.comment_count = video_2.comments.count()
+[1959] Normal: video_2.save(update_comment='')
+[1961] Normal: Favorite.Objects.get_or_create(
+[1962] Normal: user=watcher,
+[1963] Normal: targetType=Favorite.(targetType)ACTTTY:
+[1964] Normal: target_id=activity_1.id,
+[1965] Normal: )
+[1966] Normal: get_or_create(Favorite)
+[1967] Normal: user=watcher,
+[1968] Normal: target_type=Favorite.TargetType.VIDEO,
+[1969] Normal: target_id=video_1.id,
+[1970] Normal: )
+[1972] Normal: rooms = [
+[1973] Normal: ('舞房招聘', ChatRoom.Category.STUDIO_RECRUITMENT),
+[1974] Normal: ('舞蹈心得交流', ChatRoom.Category.EXPERIENCE_SHARING),
+[1975] Normal: ('比赛经验', ChatRoom.Category.CONTEST_EXPERIENCE),
+[1976] Normal: ('Hiphop', 'HIPHOP'),
+[1977] Normal: ('Swag', 'ChatRoom.SWAG'),
+[1978] Normal: ('Jazz', 'ChatRoom.JAZZ')
+[1979] Normal: ('Popping',ChatRoom. POPPING)
+[1980] Normal: (‘Locking’,ChatRoom. Category.LOCKING),
+[1981] Normal: ('Breaking',ChatRoom. CATEGORY.BREAKING),
+[1982] Normal: ('otherDance', ChatRoom.OTHER)
+[1983] Normal: ]
+[1984] Normal: created_rooms = {}
+[1985] Normal: for room_name, category in rooms:
+[1986] Normal: room, _ = ChatRoom.objects.get_or_ka
+[1987] Normal: category=category,
+[1988] Normal: defaults={'room_name': room_name}
+[1989] Normal: )
+[1990] Normal: created_rooms[category] = room
+[1992] Normal: ChatMessage.objects.get_or_create(
+[1993] Normal: room=created_rooms[ChatRoom.Category.BREAKING],
+[1994] Normal: user=dancer,
+[1995] Normal: content='这周六有人一起约练风车吗？',
+[1996] Normal: )
+[1997] Normal: ChatMessage.objects.get_or_create(
+[1998] Normal: room=created_rooms[ChatRoom.Category.JAZZ]
+[1999] Normal: user=watcher,
+[2000] Normal: 最近在练习线条控制，有推荐的基础训练吗？',
+[2001] Normal: )
+[2003] Normal: hoodie, _) = Product.objects.get_or_create(
+[2004] Normal: name='街舞卫衣',
+[2005] Normal: defaults={
+[2006] Normal: 'category': '服装',
+[2007] Normal: 'price': Decimal('199.00'),
+[2008] Normal: 'stock': 20,
+[2009] Normal: 'description': '宽松剪裁，适合排练和日常穿搭',
+[2010] Normal: 'status': Product.Status.ON_SALE,
+[2011] Normal: },
+[2012] Normal: )
+[2013] Normal: pants, _) = Product.objects.get_or_create(
+[2014] Normal: name='训练长裤',
+[2015] Normal: defaults={
+[2016] Normal: 'category': '服装',
+[2017] Normal: 'price': Decimal('169.00'),
+[2018] Normal: 'stock': 15,
+[2019] Normal: 'description': '耐磨面料，适合地板动作训练',
+[2020] Normal: 'status': Product.Status.ON_SALE,
+[2021] Normal: },
+[2022] Normal: )
+[2023] Normal: cap, _ = Product.objects.get_or_create(
+[2024] Normal: name='演出鸭舌帽',
+[2025] Normal: defaults={
+[2026] Normal: 'category': '配件',
+[2027] Normal: 'price': Decimal('89.00'),
+[2028] Normal: 'stock': 30,
+[2029] Normal: 'description': '基础百搭款',
+[2030] Normal: 'status': Product.Status.ON_SALE,
+[2031] Normal: },
+[2032] Heading 1: 第二章 运行说明与接口摘要
+[2033] Normal: 1. 系统运行方式：后端使用项目本地虚拟环境执行 migrate、seed_demo_data 和 runserver；前端进入 frontend 目录后执行 npm run dev。项目根目录还提供 start_all.ps1 一键启动脚本，可同时拉起前后端服务。
+[2034] Normal: 2．登陆策略，游客可以访问首页、活动、视频、社交、商城所有公开的内容，用户在参加活动报名、购物、下单付款、评论互动、发布内容这些需要提交个人身份信息的操作时，都会被弹出登陆窗口。
+[2035] Normal: 3.主要接口分为用户模块、活动模块、视频模块、社交模块、商城模块。
+[2036] Normal: 4.数据初始化及演示说明，系统给出seed_demo_data初始化命令，可以快速创建演示账号、示例活动、聊天室、视频作品、商城商品等。首次运行项目的时候，需要先执行数据库迁移，然后执行演示数据初始化命令，方便直接展示平台的主要业务流程。
+[2037] Normal: 5. 接口认证与会话保持：前端统一通过 apiFetch 方法发起请求，请求头默认使用 application/json，且携带 credentials: include，以保证 Django Session 登录态能够在跨页面访问中持续生效。对未登录用户访问受限接口，后端会给出明确的错误提示，前端再根据提示信息做跳转、反馈等操作。
+[2038] Normal: 6.主要的业务校验规则有活动模块的时间先后顺序、重复报名校验，视频模块的评论内容、作品信息完整性校验，社交模块的房间存在性、消息内容非空校验，商城模块的商品库存、购物车状态、订单支付状态校验。校验规则可以保证演示过程中业务数据的正确性。
+[2039] Normal: 7. 联调及展示建议，论文答辩或者项目演示时，按照登录账号进入系统、浏览首页概览、进入活动页报名、进入视频页评论、进入社交页发言、进入商城页下单并模拟支付、最后回到个人中心查看统计的顺序进行操作。该顺序可以较为完整的体现平台从信息浏览到互动交易的整个闭环。

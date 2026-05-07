@@ -58,15 +58,15 @@ function ProfilePage({ currentUser, refreshUser, setNotice }) {
   }
 
   return (
-    <div className="page-grid profile-layout">
-      <section className="panel-row profile-summary-row">
-        <article className="panel-card accent-panel profile-summary-card">
+    <div className="page-grid">
+      <section className="panel-row">
+        <article className="panel-card accent-panel">
           <span className="panel-title">个人概况</span>
           <strong>{currentUser.nickname || currentUser.username}</strong>
           <small>{currentUser.profile || '还没有填写个人简介'}</small>
         </article>
         {dashboard ? (
-          <article className="panel-card metrics-grid profile-metrics-card">
+          <article className="panel-card metrics-grid">
             <div><strong>{dashboard.counts.published_activities}</strong><span>我发布的活动</span></div>
             <div><strong>{dashboard.counts.registered_activities}</strong><span>我报名的活动</span></div>
             <div><strong>{dashboard.counts.videos}</strong><span>我的视频</span></div>
@@ -75,7 +75,7 @@ function ProfilePage({ currentUser, refreshUser, setNotice }) {
         ) : null}
       </section>
 
-      <section className="panel-card profile-edit-card">
+      <section className="panel-card">
         <div className="section-heading"><h2>编辑资料</h2></div>
         <form className="form-grid" onSubmit={submitProfile}>
           <input placeholder="昵称" value={form.nickname} onChange={(event) => setForm({ ...form, nickname: event.target.value })} />
@@ -85,35 +85,35 @@ function ProfilePage({ currentUser, refreshUser, setNotice }) {
         </form>
       </section>
 
-      <section className="triple-grid profile-more-grid">
-        <article className="panel-card profile-mini-card">
+      <section className="triple-grid">
+        <article className="panel-card">
           <span className="panel-title">我的收藏</span>
-          {favorites.length > 0 ? favorites.map((item) => (
+          {favorites.map((item) => (
             <div key={item.id} className="stack-item">
               <strong>{item.target.title}</strong>
               <small>{item.target_type}</small>
             </div>
-          )) : <p className="empty-state">暂无收藏内容</p>}
+          ))}
         </article>
 
-        <article className="panel-card profile-mini-card">
+        <article className="panel-card">
           <span className="panel-title">我的关注</span>
-          {following.length > 0 ? following.map((item) => (
+          {following.map((item) => (
             <div key={item.id} className="stack-item">
               <strong>{item.user.nickname || item.user.username}</strong>
               <small>{item.user.profile || '暂无简介'}</small>
             </div>
-          )) : <p className="empty-state">暂无关注内容</p>}
+          ))}
         </article>
 
-        <article className="panel-card profile-mini-card">
+        <article className="panel-card">
           <span className="panel-title">最近动态</span>
-          {dashboard?.latest.published_activities?.length > 0 ? dashboard.latest.published_activities.map((item) => (
+          {dashboard?.latest.published_activities.map((item) => (
             <div key={item.id} className="stack-item">
               <strong>{item.title}</strong>
               <small>{item.location}</small>
             </div>
-          )) : <p className="empty-state">暂无最近动态</p>}
+          ))}
         </article>
       </section>
     </div>
